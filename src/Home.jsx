@@ -5,7 +5,7 @@ function Home(){
     return (
         <header className="App-header">
             <div className="">
-            <h1>Login</h1>
+            <h1 className="text-primary fs-1 fw-1">Login</h1>
             <form className="">
                 <div className="mb-3">
                 <select className="form-control">
