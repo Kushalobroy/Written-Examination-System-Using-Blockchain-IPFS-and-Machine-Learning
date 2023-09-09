@@ -23,7 +23,7 @@ function Home(){
                 </div>
                 <div className="mb-3">
                     <button className="btn btn-primary" type="submit">Login</button>
-                    <button className="btn btn-danger ms-4" type="submit">Reset</button>
+                    <button className="btn btn-danger ms-4gi" type="submit">Reset</button>
                 </div>
             </form>
             </div>
