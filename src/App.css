@@ -39,3 +39,20 @@
     transform: rotate(360deg);
   }
 }
+/* Sidebar styles */
+.sidebar {
+  height: 100vh;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+}
+
+/* Main content styles */
+.main-content {
+  padding: 20px;
+}
+
+/* Navbar styles */
+.navbar {
+  z-index: 1;
+}
