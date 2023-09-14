@@ -13,7 +13,7 @@ function sidebar() {
        </div>
        <hr className='text-dark'/>
        <div className='list-group list-group-flush '>
-            <a className='list-group-item py-2 my-1' href="">
+            <a className='list-group-item py-2 my-1' href="/Admin">
                 <i className='bi bi-speedometer2 fs-5 me-3'></i>
                 <span > Dashboard</span>
             </a>

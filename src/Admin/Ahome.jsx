@@ -3,7 +3,7 @@ import '../App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebar from "./Sidebar"
 import Home from './Home'
-import AEvaluator from './AEvaluator'
+
 
 function Ahome() {
   const[toggle, setToggle] = useState(true)
@@ -20,7 +20,7 @@ function Ahome() {
          {toggle && <div className="col-4 col-md-2"></div>}
           <div className="col">
             <Home Toggle={Toggle}/>
-            <AEvaluator/>
+            
           </div>
       </div>
     </div>
