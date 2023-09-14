@@ -1,5 +1,6 @@
 import React from 'react'
 import 'bootstrap/js/dist/dropdown'
+import 'bootstrap/js/dist/collapse'
 function nav({Toggle}) {
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-transparent">
@@ -14,10 +15,11 @@ function nav({Toggle}) {
                         <a className="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             Admin
                         </a>
-                        <div className="dropdown-menu" aria-labelledby="dropdownId">
-                            <a className="dropdown-item" href="#">Profile</a>
-                            <a className="dropdown-item" href="#">Logout</a>
+                       <div className="dropdown-menu" aria-labelledby="dropdownId">
+                           <li><a className="dropdown-item" href="">Profile</a></li> 
+                           <li><a className="dropdown-item" href="">Logout</a></li> 
                         </div>
+                        
                     </li>
                 </ul>
             </div>
