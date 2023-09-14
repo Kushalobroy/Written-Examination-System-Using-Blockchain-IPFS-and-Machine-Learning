@@ -1,9 +1,10 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Sidebar from "./sidebar";
 function Shome(){
     return (
         <div>
-            <h1 className="text-center">Welcome to Student Dashboard</h1><br/>
+            <Sidebar/>
         </div>
     );
 }

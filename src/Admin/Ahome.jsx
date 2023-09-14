@@ -1,9 +1,12 @@
 import React from "react";
-import Sidebar from "./sidebar";
+import '../App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import Sidebar from './sidebar';
 function Ahome() {
   return (
-    <>  
-       <Sidebar />
+    <><Sidebar />
+      
+      
     </>
   );
 }

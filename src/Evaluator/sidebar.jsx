@@ -10,8 +10,8 @@ function sidebar() {
             <div className='bg-dark col-auto col-md-2 min-vh-100 d-flex justify-content-between flex-column'>
                 <div>
                 <a className='text-decoration-none text-white d-none d-sm-inline d-flex align-itemcenter ms-3 mt-3'>
-                    <i className='fs-4 bi bi-bank'> </i>
-                    <span className='ms-1 fs-4 d-none d-sm-inline'> Admin</span>
+                    <i className='fs-4 bi bi-person-workspace'> </i>
+                    <span className='ms-1 fs-4 d-none d-sm-inline'>Evaluator</span>
                 </a>
                 <hr className='text-secondary d-none d-sm-block'/>
                 <ul className='nav nav-pills flex-column mt-3 mt-sm-0'>
@@ -23,20 +23,8 @@ function sidebar() {
                     </li>
                     <li className='nav-item text-white fs-4 my-1 py-2 py-sm-0'>
                         <a href="" className='nav-link text-white fs-4' area-content='page'>
-                            <i className='bi bi-person-workspace'></i>
-                            <span className='ms-3 d-none d-sm-inline'>Evaluators</span>
-                        </a>
-                    </li>
-                    <li className='nav-item text-white fs-4 my-1 py-2 py-sm-0'>
-                        <a href="" className='nav-link text-white fs-4' area-content='page'>
-                            <i className='bi bi-people'></i>
-                            <span className='ms-3 d-none d-sm-inline'>Students</span>
-                        </a>
-                    </li>
-                    <li className='nav-item text-white fs-4 my-1 py-2 py-sm-0'>
-                        <a href="" className='nav-link text-white fs-4' area-content='page'>
-                            <i className='bi bi-alarm'></i>
-                            <span className='ms-3 d-none d-sm-inline'>Exam</span>
+                            <i className='bi bi-journals'></i>
+                            <span className='ms-3 d-none d-sm-inline'>Answerbook</span>
                         </a>
                     </li>
                 </ul>
@@ -44,7 +32,7 @@ function sidebar() {
                 <div class="dropdown open">
                     <a class="text-decoration-none text-white dropdown-toggle p-3" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
-                               <i className='bi bi-person-circle '></i><span className='ms-2 d-none d-sm-inline'> Admin</span>
+                               <i className='bi bi-person-circle '></i><span className='ms-2 d-none d-sm-inline'>Evaluator</span>
                             </a>
                     <div class="dropdown-menu" aria-labelledby="triggerId">
                         <a class="dropdown-item" href=""><span className=''> Profile</span></a>
