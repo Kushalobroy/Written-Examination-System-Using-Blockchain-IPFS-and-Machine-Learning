@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import 'bootstrap/js/dist/dropdown'
 import '../components/sidebar.css'
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 function sidebar() {
   return (
     <div className='bg-white sidebar p-2'>
@@ -16,7 +17,7 @@ function sidebar() {
                 <i className='bi bi-speedometer2 fs-5 me-3'></i>
                 <span > Dashboard</span>
             </a>
-            <a className='list-group-item py-2' href="">
+            <a className='list-group-item py-2' href="/AEvaluator">
                 <i className='bi bi-person-workspace fs-5 me-3'></i>
                 <span> Evaluators</span>
             </a>
@@ -29,11 +30,16 @@ function sidebar() {
                 <span > Exam</span>
             </a>
             <a className='list-group-item py-2' href="">
+                <i className='bi bi-person-circle fs-5 me-3'></i>
+                <span>Add Admin</span>
+            </a>
+            <a className='list-group-item py-2' href="">
                 <i className='bi bi-power fs-5 me-3'></i>
                 <span >Logout</span>
             </a>
        </div>
     </div>
+    
   )
 }
 

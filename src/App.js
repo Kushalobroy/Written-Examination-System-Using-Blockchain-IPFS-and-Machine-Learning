@@ -6,7 +6,7 @@ import Ahome from "./Admin/Ahome";
 import Ehome from "./Evaluator/Ehome";
 import Shome from "./Student/Shome";
 import Home from "./Home";
-
+import AEvaluator from "../src/Admin/AEvaluator"
 function App() {
 
   return (
@@ -16,7 +16,8 @@ function App() {
           <Route path='/' element={<Home/>} />
           <Route path='/Admin' element={<Ahome />} />
           <Route path='/Student' element={<Shome />} />
-          <Route path='/Evaluator' element={<Ehome />} />
+          <Route path='/Evaluator' element={<Ehome/>} />
+          <Route path='/AEvaluator' element={<AEvaluator/>} />
         </Routes>
       </Router>
     </div>
