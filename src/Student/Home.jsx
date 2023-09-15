@@ -27,15 +27,16 @@ function Home({ Toggle }) {
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title text-danger" id="exampleModalLabel">Warning</h5>
+                                                <h5 class="modal-title text-danger" id="exampleModalLabel">Warning (read carefully before proceeding)</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                ...
+                                                <p><span >1.</span>You can not exit as fullscreen before end of the examination.</p>
+                                                <p><span >2.</span>If you are trying to exit more than 5 times exam will be autosubmitted.</p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Proceed</button>
+                                                <a href="/exam" className='btn btn-primary'>Proceed</a>
                                             </div>
                                         </div>
                                     </div>
