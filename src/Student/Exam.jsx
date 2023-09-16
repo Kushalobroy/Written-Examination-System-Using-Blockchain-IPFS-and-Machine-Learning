@@ -1,13 +1,21 @@
-import React from 'react'
-import Editor from './Editor'
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/js/dist/modal'
+import FullScreen from './FullScreen'
+
+import { Document, Page} from '@react-pdf/renderer';
+import Ansbook from './Ansbook';
 function Exam() {
     return (
-
+        <>
+        
         <div className='container mt-5'>
-
+        <FullScreen/>
             <nav class="navbar fixed-top navbar-light bg-light text-center">
                    
             </nav>
+            <Document>
+            <Page>
             <div>
             <div className='mb-3 mt-5 pt-5 pb-5 bg-light rounded shadow-lg p-3 mb'>
                 <h4 className='fw-1 '>Section A</h4>
@@ -78,10 +86,13 @@ function Exam() {
                 <textarea className='form-control' name="ans1" cols="130" rows="10" placeholder='Answer 5'></textarea>
             </div>
             </div>
+            </Page>
+            </Document>
             <div className='mb-3'>
-                <button type='submit' className='btn btn-primary'>Submit</button>
+                <Ansbook/>
             </div>
         </div>
+        </>
     )
 }
 

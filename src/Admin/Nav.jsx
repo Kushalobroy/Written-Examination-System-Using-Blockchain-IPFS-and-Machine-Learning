@@ -13,7 +13,7 @@ function nav({Toggle}) {
                 <ul className="navbar-nav ms-auto mt-2 mt-lg-0">
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Student
+                            Admin
                         </a>
                        <div className="dropdown-menu" aria-labelledby="dropdownId">
                            <li><a className="dropdown-item" href="">Profile</a></li> 

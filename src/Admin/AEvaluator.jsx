@@ -73,12 +73,11 @@ function Evaluator() {
                     </div>
                   </form>
                 </div>
-                </div>
-              </div>
+                
                 <div className="col-md-7">
                 <h4 className="text-white text-center fs-4">Evaluators</h4>
                 
-                  <table class="table caption-top bg-white rounded">
+                  <table class="table table-responsive caption-top bg-white rounded">
                     
                     <thead>
                       <tr>
@@ -127,7 +126,8 @@ function Evaluator() {
 
           </div>
         </div>
-
+        </div>
+              </div>
       </div>
     </div>
   )
