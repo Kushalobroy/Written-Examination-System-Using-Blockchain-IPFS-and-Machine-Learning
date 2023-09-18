@@ -29,7 +29,7 @@ function sidebar() {
                 <i className='bi bi-alarm-fill fs-5 me-3'></i>
                 <span > Exam</span>
             </a>
-            <a className='list-group-item py-2' href="">
+            <a className='list-group-item py-2' href="/Aadd">
                 <i className='bi bi-person-circle fs-5 me-3'></i>
                 <span>Add Admin</span>
             </a>

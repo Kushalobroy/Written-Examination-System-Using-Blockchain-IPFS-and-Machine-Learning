@@ -20,9 +20,9 @@ function Evaluator() {
         <div className="col">
           <div className="px-3">
             <Nav Toggle={Toggle} />
-            <div className='container-fluid'>
-              <div className='row g-3 my-2'>
-                <div className='col-md-5'>
+           
+              <div className='row'>
+                <div className='col-md-6'>
                   <h4 className="text-white text-center fs-4">Add Evaluator</h4>
                   <form action="">
                     <div className="mb-3">
@@ -74,7 +74,7 @@ function Evaluator() {
                   </form>
                 </div>
                 
-                <div className="col-md-7">
+                <div className="col-md-6">
                 <h4 className="text-white text-center fs-4">Evaluators</h4>
                 
                   <table class="table table-responsive caption-top bg-white rounded">
@@ -129,7 +129,7 @@ function Evaluator() {
         </div>
               </div>
       </div>
-    </div>
+ 
   )
 }
 

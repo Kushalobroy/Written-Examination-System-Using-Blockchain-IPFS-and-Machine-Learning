@@ -3,47 +3,31 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import 'bootstrap/js/dist/dropdown'
 import '../components/sidebar.css'
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 function sidebar() {
   return (
-    <div className='container-fluid'>
-        <div className='row'>
-            <div className='bg-dark col-auto col-md-2 min-vh-100 d-flex justify-content-between flex-column'>
-                <div>
-                <a className='text-decoration-none text-white d-none d-sm-inline d-flex align-itemcenter ms-3 mt-3'>
-                    <i className='fs-4 bi bi-person-workspace'> </i>
-                    <span className='ms-1 fs-4 d-none d-sm-inline'>Evaluator</span>
-                </a>
-                <hr className='text-secondary d-none d-sm-block'/>
-                <ul className='nav nav-pills flex-column mt-3 mt-sm-0'>
-                    <li className='nav-item text-white fs-4 my-1 py-2 py-sm-0'>
-                        <a href="" className='nav-link text-white fs-4' area-content='page'>
-                            <i className='bi bi-speedometer2'></i>
-                            <span className='ms-3 d-none d-sm-inline'>Dashboard</span>
-                        </a>
-                    </li>
-                    <li className='nav-item text-white fs-4 my-1 py-2 py-sm-0'>
-                        <a href="" className='nav-link text-white fs-4' area-content='page'>
-                            <i className='bi bi-journals'></i>
-                            <span className='ms-3 d-none d-sm-inline'>Answerbook</span>
-                        </a>
-                    </li>
-                </ul>
-                </div>
-                <div class="dropdown open">
-                    <a class="text-decoration-none text-white dropdown-toggle p-3" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                               <i className='bi bi-person-circle '></i><span className='ms-2 d-none d-sm-inline'>Evaluator</span>
-                            </a>
-                    <div class="dropdown-menu" aria-labelledby="triggerId">
-                        <a class="dropdown-item" href=""><span className=''> Profile</span></a>
-                        <a class="dropdown-item" href="">
-                    <span className=''> Log out</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div className='bg-white sidebar p-2'>
+       <div className='m-2'>
+            <i className='bi bi-person-circle me-3 fs-4'></i>
+            <span className='brand-name fs-4'>Evaluator</span>
+       </div>
+       <hr className='text-dark'/>
+       <div className='list-group list-group-flush '>
+            <a className='list-group-item py-2 my-1' href="/Admin">
+                <i className='bi bi-speedometer2 fs-5 me-3'></i>
+                <span > Dashboard</span>
+            </a>
+            <a className='list-group-item py-2 my-1' href="/Eanswerbook">
+                <i className='bi bi-journals fs-5 me-3'></i>
+                <span > Answerbook</span>
+            </a>
+            <a className='list-group-item py-2' href="">
+                <i className='bi bi-power fs-5 me-3'></i>
+                <span >Logout</span>
+            </a>
+       </div>
     </div>
+    
   )
 }
 
