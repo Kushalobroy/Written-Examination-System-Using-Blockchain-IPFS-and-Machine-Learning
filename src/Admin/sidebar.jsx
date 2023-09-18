@@ -21,7 +21,7 @@ function sidebar() {
                 <i className='bi bi-person-workspace fs-5 me-3'></i>
                 <span> Evaluators</span>
             </a>
-            <a className='list-group-item py-2' href="">
+            <a className='list-group-item py-2' href="/Astudent">
                 <i className='bi bi-people-fill fs-5 me-3'></i>
                 <span> Students</span>
             </a>
