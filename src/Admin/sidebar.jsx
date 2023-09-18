@@ -5,7 +5,7 @@ import 'bootstrap/js/dist/dropdown'
 import '../components/sidebar.css'
 
 
-function sidebar() {
+function Sidebar() {
 
   return (
     <div className='bg-white sidebar p-2'>
