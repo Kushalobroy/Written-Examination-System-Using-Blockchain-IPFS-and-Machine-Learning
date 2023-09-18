@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import 'bootstrap/js/dist/dropdown'
 import '../components/sidebar.css'
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+
 function sidebar() {
   return (
     <div className='bg-white sidebar p-2'>

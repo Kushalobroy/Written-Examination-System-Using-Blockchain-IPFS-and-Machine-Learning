@@ -1,9 +1,11 @@
 import React from 'react'
 import Nav from './Nav'
-function Home({Toggle}) {
+import Chart from "chart.js/auto";
+import { Bar, Line } from "react-chartjs-2";
+function Home({ Toggle }) {
     return (
         <div className='px-3'>
-            <Nav Toggle={Toggle}/>
+            <Nav Toggle={Toggle} />
             <div className='container-fluid'>
                 <div className='row g-3 my-2'>
                     <div className='col-md-3'>
@@ -45,41 +47,59 @@ function Home({Toggle}) {
 
                 </div>
             </div>
+            <div className='row'>
+                <div className='col-md-6 bg-white'>
+                <BarChart />
+                </div>
+                <div className='col-md-6 bg-white'>
+                <LineChart />
+                </div>
             
-                
-                <table class="table caption-top bg-white rounded mt-2">
-                <caption className='text-white fs-4'>Student List</caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
-      
+
+
+        </div>
+
     )
 }
+const BarChart = () => {
+    const labels = ["January", "February", "March", "April", "May", "June"];
+    const data = {
+        labels: labels,
+        datasets: [
+            {
+                label: "My First dataset",
+                backgroundColor: "rgb(255, 99, 132)",
+                borderColor: "rgb(255, 99, 132)",
+                data: [0, 10, 5, 2, 20, 30, 45],
+            },
+        ],
+    };
+    return (
+        <div>
+            <Bar data={data} />
+        </div>
+    );
+};
+const labels = ["January", "February", "March", "April", "May", "June"];
 
+const data = {
+  labels: labels,
+  datasets: [
+    {
+      label: "My First dataset",
+      backgroundColor: "rgb(255, 99, 132)",
+      borderColor: "rgb(255, 99, 132)",
+      data: [0, 10, 5, 2, 20, 30, 45],
+    },
+  ],
+};
+
+const LineChart = () => {
+  return (
+    <div>
+      <Line data={data} />
+    </div>
+  );
+};
 export default Home
