@@ -89,7 +89,7 @@ function Exam() {
             </Page>
             </Document>
             <div className='mb-3'>
-                <Ansbook/>
+                
             </div>
         </div>
         </>
