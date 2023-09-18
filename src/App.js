@@ -9,6 +9,7 @@ import Exam from "./Student/Exam";
 import Home from "./Home";
 import AEvaluator from "../src/Admin/AEvaluator"
 import Astudent from './Admin/Astudent';
+import Aexam from './Admin/Aexam';
 function App() {
 
   return (
@@ -19,7 +20,9 @@ function App() {
           <Route path='/Admin' element={<Ahome />} />
           <Route path='/AEvaluator' element={<AEvaluator/>} />
           <Route path='/Astudent' element={<Astudent/>}/>
+          <Route path='/Aexam' element={<Aexam/>}/>
 
+          
           <Route path='/Student' element={<Shome />} />
           <Route path='/Exam' element={<Exam />} />
           

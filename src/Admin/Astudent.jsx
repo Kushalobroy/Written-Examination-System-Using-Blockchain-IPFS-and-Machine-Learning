@@ -45,7 +45,24 @@ function Astudent() {
                                                     <td>7</td>
                                                     <td><a className="btn btn-success" href="">View Profile</a></td>
                                                 </tr>
-                                               
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Mark</td>
+                                                    <td>B.tech</td>
+                                                    <td>IT</td>
+                                                    <td>2020-2024</td>
+                                                    <td>7</td>
+                                                    <td><a className="btn btn-success" href="">View Profile</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Mark</td>
+                                                    <td>B.tech</td>
+                                                    <td>IT</td>
+                                                    <td>2020-2024</td>
+                                                    <td>7</td>
+                                                    <td><a className="btn btn-success" href="">View Profile</a></td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
