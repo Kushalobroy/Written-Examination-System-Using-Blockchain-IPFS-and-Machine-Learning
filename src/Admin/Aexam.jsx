@@ -68,7 +68,13 @@ function Aexam() {
                                             </select>
                                         </div>
                                         <div className="mb-3">
-                                            <button type="submit" className="btn btn-primary">Submit</button>
+                                            <input className="form-control" type="date" name="date" id="" />
+                                        </div>
+                                        <div className="mb-3">
+                                            <input className="form-control" type="time" name="time"/>
+                                        </div>
+                                        <div className="mb-3">
+                                            <a href="/AddQuestions" type="submit" className="btn btn-primary">Schedule</a>
                                             <button type="submit" className="btn btn-danger ms-2">Reset</button>
                                         </div>
                                     </form>
