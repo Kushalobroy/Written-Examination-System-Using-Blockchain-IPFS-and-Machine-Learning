@@ -4,7 +4,9 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import 'bootstrap/js/dist/dropdown'
 import '../components/sidebar.css'
 
-function sidebar() {
+
+function Sidebar() {
+
   return (
     <div className='bg-white sidebar p-2'>
        <div className='m-2'>
@@ -43,4 +45,4 @@ function sidebar() {
   )
 }
 
-export default sidebar
+export default Sidebar

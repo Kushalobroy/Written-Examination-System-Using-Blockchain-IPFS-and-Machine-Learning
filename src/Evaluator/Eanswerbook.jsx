@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import '../App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import Sidebar from "./Sidebar"
+import Sidebar from "./sidebar"
 import Nav from './Nav'
 function Eanswerbook() {
     const [toggle, setToggle] = useState(true)
