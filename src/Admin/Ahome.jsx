@@ -23,11 +23,7 @@ function Ahome() {
             
           </div>
       </div>
-    </div>
-    
-      
-      
-   
+    </div>   
   );
 }
 

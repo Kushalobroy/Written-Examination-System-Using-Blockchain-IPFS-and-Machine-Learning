@@ -8,6 +8,11 @@ import Shome from "./Student/Shome";
 import Exam from "./Student/Exam";
 import Home from "./Home";
 import AEvaluator from "../src/Admin/AEvaluator"
+import Astudent from './Admin/Astudent';
+import Aexam from './Admin/Aexam';
+import Aadd from './Admin/Aadd';
+
+import Eanswerbook from './Evaluator/Eanswerbook';
 function App() {
 
   return (
@@ -17,11 +22,15 @@ function App() {
           <Route path='/' element={<Home/>} />
           <Route path='/Admin' element={<Ahome />} />
           <Route path='/AEvaluator' element={<AEvaluator/>} />
+          <Route path='/Astudent' element={<Astudent/>}/>
+          <Route path='/Aexam' element={<Aexam/>}/>
+          <Route path='/Aadd' element={<Aadd/>}/>
 
           <Route path='/Student' element={<Shome />} />
           <Route path='/Exam' element={<Exam />} />
           
           <Route path='/Evaluator' element={<Ehome/>} />
+          <Route path='/Eanswerbook' element={<Eanswerbook/>}/>
           
         </Routes>
       </Router>

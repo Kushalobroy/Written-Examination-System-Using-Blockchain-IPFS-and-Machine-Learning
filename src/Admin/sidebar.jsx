@@ -3,8 +3,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import 'bootstrap/js/dist/dropdown'
 import '../components/sidebar.css'
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-function sidebar() {
+
+
+function Sidebar() {
+
   return (
     <div className='bg-white sidebar p-2'>
        <div className='m-2'>
@@ -21,15 +23,15 @@ function sidebar() {
                 <i className='bi bi-person-workspace fs-5 me-3'></i>
                 <span> Evaluators</span>
             </a>
-            <a className='list-group-item py-2' href="">
+            <a className='list-group-item py-2' href="/Astudent">
                 <i className='bi bi-people-fill fs-5 me-3'></i>
                 <span> Students</span>
             </a>
-            <a className='list-group-item py-2' href="">
+            <a className='list-group-item py-2' href="/Aexam">
                 <i className='bi bi-alarm-fill fs-5 me-3'></i>
                 <span > Exam</span>
             </a>
-            <a className='list-group-item py-2' href="">
+            <a className='list-group-item py-2' href="/Aadd">
                 <i className='bi bi-person-circle fs-5 me-3'></i>
                 <span>Add Admin</span>
             </a>
@@ -43,4 +45,4 @@ function sidebar() {
   )
 }
 
-export default sidebar
+export default Sidebar
