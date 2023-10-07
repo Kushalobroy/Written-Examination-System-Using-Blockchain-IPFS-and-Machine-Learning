@@ -4,8 +4,8 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import 'bootstrap/js/dist/dropdown'
 import '../components/sidebar.css'
 
-
 function Sidebar() {
+
 
   return (
     <div className='bg-white sidebar p-2'>
