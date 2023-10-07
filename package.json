@@ -18,12 +18,12 @@
     "react-bootstrap": "^2.8.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
+ 
     "react-draft-wysiwyg": "^1.15.0",
     "react-mathquill": "^1.0.3",
-=======
+
     "react-pdf": "^7.3.3",
->>>>>>> a81bca87eb9306062d67bf3a5e0330b59afa0753
+
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
