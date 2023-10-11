@@ -48,10 +48,10 @@ function Home({ Toggle }) {
                 </div>
             </div>
             <div className='row'>
-                <div className='col-md-6 bg-white'>
+                <div className='col-md-5 bg-white ms-1'>
                 <BarChart />
                 </div>
-                <div className='col-md-6 bg-white'>
+                <div className='col-md-5 bg-white ms-1'>
                 <LineChart />
                 </div>
             
