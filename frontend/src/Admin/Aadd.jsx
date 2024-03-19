@@ -3,6 +3,9 @@ import '../App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebar from "./sidebar"
 import Nav from './Nav'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function Aadd() {
     const [toggle, setToggle] = useState(true)
     const Toggle = () => {
@@ -40,18 +43,18 @@ function Aadd() {
         }
     
         try {
-          const response = await fetch('http://localhost:3000/api/admin/create', {
+          const response = await fetch('http://localhost:5000/api/admin/create', {
             method: 'POST',
             body: data,
           });
     
           if (response.ok) {
             // Handle success
-            alert('Admin Added successfully');
+            toast.success('Admin Added successfully');
             window.location.reload();
           } else {
             // Handle errors
-            alert('Error: Admin registration failed');
+            toast.error('Error: Admin registration failed');
           }
         } catch (error) {
           console.error(error);
@@ -63,7 +66,7 @@ function Aadd() {
   useEffect(() => {
     async function fetchAdmins() {
       try {
-        const response = await fetch('http://localhost:3000/api/admin',{
+        const response = await fetch('http://localhost:5000/api/admin',{
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -74,7 +77,7 @@ function Aadd() {
           setAdmins(data);
           
         } else {
-          console.error('Error: Failed to fetch admin data');
+          toast.error('Error: Failed to fetch admin data');
         }
       } catch (error) {
         console.error('Network error: ' + error.message);
@@ -86,7 +89,9 @@ function Aadd() {
 
     
     return (
+      <><ToastContainer position="top-right" autoClose='3000'/>
         <div className="container-fluid bg-secondary min-vh-100">
+          
             <div className="row">
                 {toggle && <div className="col-4 col-md-2  bg-white vh-100 position-fixed">
                     <Sidebar />
@@ -159,6 +164,7 @@ function Aadd() {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

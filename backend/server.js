@@ -4,7 +4,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
-const port = 3000; // You can choose any port you prefer
+const port = 5000; // You can choose any port you prefer
 const studentRoutes = require('./routes/studentRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const evaluatorRoutes = require('./routes/evaluatorRoutes');
@@ -14,50 +14,50 @@ const Student = require('./models/studentModel');
 
 const adminController = require('./controllers/adminController');
 
-const Web3 = require('web3');
-const web3 = new Web3('http://127.0.0.1:7545');
-web3.eth.getAccounts()
-  .then(accounts => console.log('Connected to Ethereum node. Accounts:', accounts))
-  .catch(error => console.error('Error connecting to Ethereum node:', error));
+    // const Web3 = require('web3');
+    // const web3 = new Web3('http://127.0.0.1:7545');
+    // web3.eth.getAccounts()
+    //   .then(accounts => console.log('Connected to Ethereum node. Accounts:', accounts))
+    //   .catch(error => console.error('Error connecting to Ethereum node:', error));
 
-const contractData = require('./build/contracts/MyContract.json');
-const contract = new web3.eth.Contract(contractData.abi);
+    // const contractData = require('./build/contracts/MyContract.json');
+    // const contract = new web3.eth.Contract(contractData.abi);
 
-const deployContract = async () => {
-  try {
-    const deployedContract = await contract.deploy({
-      data: contractData.bytecode,
-      arguments: [/* constructor arguments if any */],
-    }).send({
-      from: '0x2eB48e9bBbB18e95E1e6766fcfa83b35B879e49f',  // Replace with your account address from Ganache
-      gas: '6721975',         // Replace with an appropriate gas limit
-    });
+    // const deployContract = async () => {
+    //   try {
+    //     const deployedContract = await contract.deploy({
+    //       data: contractData.bytecode,
+    //       arguments: [/* constructor arguments if any */],
+    //     }).send({
+    //       from: '0x2eB48e9bBbB18e95E1e6766fcfa83b35B879e49f',  // Replace with your account address from Ganache
+    //       gas: '6721975',         // Replace with an appropriate gas limit
+    //     });
 
-    console.log('Contract deployed at address:', deployedContract.options.address);
-  } catch (error) {
-    console.error('Error deploying contract:', error);
-  }
-};
-// Call the async function
-deployContract();
+    //     console.log('Contract deployed at address:', deployedContract.options.address);
+    //   } catch (error) {
+    //     console.error('Error deploying contract:', error);
+    //   }
+    // };
+    // // Call the async function
+    // deployContract();
 
-const contractAddress = '0x8B403027f81Fd28A41FAd404BD0440d8a5023CD9'; // Replace with your contract address
+    // const contractAddress = '0x8B403027f81Fd28A41FAd404BD0440d8a5023CD9'; // Replace with your contract address
 
-// Create a contract instance
-const myContract = new web3.eth.Contract(contractData.abi, contractAddress);
+    // // Create a contract instance
+    // const myContract = new web3.eth.Contract(contractData.abi, contractAddress);
 
-const getMyVar = async () => {
-  try {
-    // Call the 'myVar' function
-    const result = await myContract.methods.myVar().call();
-    console.log('Value of myVar:', result);
-  } catch (error) {
-    console.error('Error reading myVar:', error);
-  }
-};
+    // const getMyVar = async () => {
+    //   try {
+    //     // Call the 'myVar' function
+    //     const result = await myContract.methods.myVar().call();
+    //     console.log('Value of myVar:', result);
+    //   } catch (error) {
+    //     console.error('Error reading myVar:', error);
+    //   }
+    // };
 
-// Call the function to read myVar
-getMyVar();
+    // // Call the function to read myVar
+    // getMyVar();
 
 
 require('dotenv').config();

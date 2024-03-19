@@ -2,20 +2,55 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/js/dist/modal";
 import FullScreen from "./FullScreen";
-
+import axios from 'axios';
+import html2pdf from 'html2pdf.js';
 import { Document, Page } from "@react-pdf/renderer";
 import Ansbook from "./Ansbook";
 import TextEditor from "./TextEditor";
 import { Editor } from "draft-js";
+
+
+
 function Exam() {
+  const handleAnsBook = async () => {
+    const element = document.getElementById('content-to-convert');
+    const options = {
+      margin: 10, // Set margin to 10mm
+      padding:100,
+      filename: 'converted.pdf', // Set PDF filename
+      image: { type: 'jpeg', quality: 0.98 }, // Set image type and quality
+      html2canvas: { scale: 2 }, // Set html2canvas scale to 2
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } // Set jsPDF unit, format, and orientation
+    };
+
+    const pdfBlob = await html2pdf().from(element).set(options).output('blob');
+
+    // Save PDF to the database
+    const formData = new FormData();
+    formData.append('pdf', pdfBlob, 'converted.pdf');
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/student/ansbook', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      console.log(response.data);
+    } catch (error) {
+      alert("Something went wrong");
+      console.error('Error uploading PDF:', error);
+    }
+
+    // Prompt the user to save the PDF locally
+    //html2pdf().from(element).save('converted.pdf');
+  };
   return (
-    <>
-      <div className="container mt-5">
+    < >
+      <div className="container mt-5" id="content-to-convert">
         <FullScreen />
         <nav class="navbar fixed-top navbar-light bg-light text-center"></nav>
-        <Document>
-          <Page>
-            <div>
+       
+            <div >
               <div className="mb-3 mt-5 pt-5 pb-5 bg-light rounded shadow-lg p-3 mb">
                 <h4 className="fw-1 ">Section A</h4>
                 <h6>Note: Attempt all the questions !</h6>
@@ -190,10 +225,9 @@ function Exam() {
                 ></textarea>
               </div>
             </div>
-          </Page>
-        </Document>
+       
         <div className="mb-3">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary" onClick={handleAnsBook}>
             Submit
           </button>
         </div>

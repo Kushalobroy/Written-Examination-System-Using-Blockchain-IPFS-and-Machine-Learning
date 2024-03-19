@@ -1,35 +1,27 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Home() {
-    const handleLogin = (event) => {
-        event.preventDefault(); // Prevent the default form submission behavior
-
-        const userId = document.getElementById('userIdInput').value;
-        const password = document.getElementById('passwordInput').value;
-        console.log('Received login request:', { userId, password });
-        fetch('http://localhost:3000/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: userId,
-                password: password,
-            }),
-        })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else if (response.status === 401) {
-                    throw new Error('Unauthorized: Invalid credentials');
-                } else {
-                    throw new Error('Error: Something went wrong');
-                }
-            })
-            .then(data => {
-                alert('Logged In Successfully');
-                // Redirect based on userType (if needed)
+    const handleLogin = async (event) => {
+        event.preventDefault();
+    
+        try {
+            const userId = event.target.elements.userIdInput.value;
+            const password = event.target.elements.passwordInput.value;
+            
+            const response = await fetch('http://localhost:5000/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username: userId, password: password }),
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                toast.success('Login Successful');
+                sessionStorage.setItem('userData', JSON.stringify(data)); 
                 if (data.role === 'student') {
                     window.location.href = '/Student?id=' + data.id;
                 } else if (data.role === 'admin') {
@@ -37,16 +29,24 @@ function Home() {
                 } else if (data.role === 'evaluator') {
                     window.location.href = '/Evaluator?id=' + data.id;
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error.message);
-                alert(error.message);
-            });
+            } else if (response.status === 401) {
+                toast.error('Invalid credentials');
+            } else {
+                toast.error('Something went wrong');
+            }
+        } catch (error) {
+            console.error('Error:', error.message);
+            toast.error(' Something went wrong');
+        }
     };
 
     return (
-        <div className="container-sm w-50 mb-3 mt-5 pt-5 pb-5 bg-light rounded shadow-lg p-3 mb">
-            <h1 className="text-primary fs-1 fw-1 mt-3 mb-2">Login</h1>
+
+           <>
+            <ToastContainer position="top-right" autoClose='3000'/>
+            <div class="wrapper">
+                
+                 {/* <h1 className="text-primary fs-1 fw-1 mt-3 mb-2">Login</h1>
             <form id="loginForm" onSubmit={handleLogin} className="">
                 <div className="mb-3">
                     <input type="text" className="form-control form-control-sm" placeholder="User id" id="userIdInput"></input>
@@ -60,8 +60,29 @@ function Home() {
                     <button type='submit' className="btn btn-outline-primary btn-sm">Login</button>
                     <button className="btn btn-outline-danger btn-sm ms-4" type="reset">Reset</button>
                 </div>
-            </form>
+            </form> */}
+        <div class="logo">
+            <img src="./img/login.png" alt="" />
         </div>
+        <div class="text-center mt-4 name">
+            Login
+        </div>
+        <form class="p-3 mt-3" id="loginForm" onSubmit={handleLogin}>
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="userName" id="userIdInput" placeholder="Username" required/>
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="password" id="passwordInput" placeholder="Password" required />
+            </div>
+            <button class="btn mt-3" type="submit">Login</button>
+        </form>
+        <div class="text-center fs-6">
+            <a href="#">Forget password?</a>
+        </div>
+    </div>
+    </>
     );
 }
 
