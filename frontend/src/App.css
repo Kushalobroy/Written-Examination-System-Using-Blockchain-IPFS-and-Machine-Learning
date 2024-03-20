@@ -160,3 +160,20 @@ body {
         padding: 40px 15px 15px 15px;
     }
 }
+
+.live-proctoring-container {
+  position: relative;
+  width: 100%;
+
+}
+
+.webcam-feed {
+  position: fixed;
+  top: 10px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+  width: 120px; /* Adjust as needed */
+  height: auto;
+  border: 2px solid #fff; /* Optional: Add border for better visibility */
+  border-radius: 5px;
+  z-index: 1000; /* Ensure the webcam feed appears above other content */
+}

@@ -19,6 +19,7 @@ function TextEditor() {
         modules={TextEditor.modules}
         formats={TextEditor.formats}
         placeholder="Write your response here..."
+        theme="snow"
       />
     </div>
   );
@@ -44,6 +45,7 @@ TextEditor.formats = [
   "underline",
   "link",
   "image",
+  
 ];
 
 export default TextEditor;

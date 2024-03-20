@@ -7,8 +7,7 @@ import html2pdf from 'html2pdf.js';
 import { Document, Page } from "@react-pdf/renderer";
 import Ansbook from "./Ansbook";
 import TextEditor from "./TextEditor";
-import { Editor } from "draft-js";
-
+import LiveProctoring from '../components/LiveProctoring';
 
 
 function Exam() {
@@ -24,32 +23,37 @@ function Exam() {
     };
 
     const pdfBlob = await html2pdf().from(element).set(options).output('blob');
-
+  
     // Save PDF to the database
     const formData = new FormData();
     formData.append('pdf', pdfBlob, 'converted.pdf');
-
+   
     try {
-      const response = await axios.post('http://localhost:5000/api/student/ansbook', formData, {
+      const response = await axios.post('http://127.0.0.1:5001/api/v0/add', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+            'Content-Type': 'multipart/form-data'
         }
-      });
-      console.log(response.data);
+    });
+
+    // Parse the response to extract the IPFS hash of the uploaded file
+    const ipfsHash = response.data.Hash;
+    console.log(ipfsHash);
+    alert('File uploaded to ipfs successfully');
     } catch (error) {
       alert("Something went wrong");
       console.error('Error uploading PDF:', error);
     }
 
     // Prompt the user to save the PDF locally
-    //html2pdf().from(element).save('converted.pdf');
+    html2pdf().from(element).save('converted.pdf');
   };
   return (
     < >
       <div className="container mt-5" id="content-to-convert">
         <FullScreen />
         <nav class="navbar fixed-top navbar-light bg-light text-center"></nav>
-       
+
+      <LiveProctoring />
             <div >
               <div className="mb-3 mt-5 pt-5 pb-5 bg-light rounded shadow-lg p-3 mb">
                 <h4 className="fw-1 ">Section A</h4>

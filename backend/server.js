@@ -104,6 +104,37 @@ app.use(session({
     saveUninitialized: true,
 }));
 
+
+const axios = require('axios');
+app.post('/api/upload', async (req, res) => {
+  try {
+    if (!req.files || !req.files.pdf) {
+      return res.status(400).json({ message: 'No PDF file uploaded' });
+  }
+      const file = req.files.pdf; // Assuming you're using a middleware like 'express-fileupload' to handle file uploads
+      
+      // Create a FormData object and append the file to it
+      const formData = new FormData();
+      formData.append('file', file.data, file.name);
+      
+      // Send a POST request to the IPFS public gateway API
+      const response = await axios.post('http://127.0.0.1:5001/api/v0/add', formData, {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          }
+      });
+
+      // Parse the response to extract the IPFS hash of the uploaded file
+      const ipfsHash = response.data.Hash;
+
+      // Return the IPFS hash as the response
+      res.json({ ipfsHash });
+  } catch (error) {
+      console.error('Error uploading file to IPFS:', error);
+      res.status(500).json({ message: 'Server Error' });
+  }
+});
+
 app.use('/api/admin',  adminRoutes);
 app.use('/api/evaluator',  evaluatorRoutes);
 app.use('/api/student',  studentRoutes);
