@@ -7,7 +7,7 @@ import html2pdf from 'html2pdf.js';
 import { Document, Page } from "@react-pdf/renderer";
 import Ansbook from "./Ansbook";
 import TextEditor from "./TextEditor";
-import LiveProctoring from '../components/LiveProctoring';
+import LiveProctoring from '../LiveProctoring';
 
 
 function Exam() {

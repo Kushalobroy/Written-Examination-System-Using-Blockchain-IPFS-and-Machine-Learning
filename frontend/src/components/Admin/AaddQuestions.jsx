@@ -3,7 +3,7 @@ import React from 'react'
 function AaddQuestions() {
   return (
     <div>
-      <h1 className='text-center fw-bold'>Add Question</h1>
+      <h1>You Can Add the QUestions Here !</h1>
     </div>
   )
 }

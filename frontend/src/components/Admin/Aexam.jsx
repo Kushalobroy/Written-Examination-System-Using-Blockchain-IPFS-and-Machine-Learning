@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../App.css';
+import '../../App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebar from "./sidebar"
 import Nav from './Nav'
@@ -92,13 +92,8 @@ function Aexam() {
                                         </div>
                                         </div>
                                     </div>
-                                    
-                                        
-                                        
-                                        
-                                        
                                         <div className="mb-3">
-                                            <a href="/AddQuestions" type="submit" className="btn btn-primary">Schedule</a>
+                                            <a href="/AaddQuestions" type="submit" className="btn btn-primary">Schedule</a>
                                             <button type="submit" className="btn btn-danger ms-2">Reset</button>
                                         </div>
                                     </form>
