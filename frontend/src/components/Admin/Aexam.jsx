@@ -3,11 +3,32 @@ import '../../App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebar from "./sidebar"
 import Nav from './Nav'
+import { Form, Button, ProgressBar } from 'react-bootstrap';
 function Aexam() {
     const [toggle, setToggle] = useState(true)
     const Toggle = () => {
         setToggle(!toggle)
     }
+    const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({});
+
+  const handleNext = () => {
+    setStep(step + 1);
+  };
+
+  const handlePrevious = () => {
+    setStep(step - 1);
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // handle form submission
+  };
     return (
         <div className="container-fluid bg-secondary min-vh-100">
             <div className="row">
@@ -18,12 +39,12 @@ function Aexam() {
                 <div className="col">
                     <div className="px-3">
                         <Nav Toggle={Toggle} />
-                        <div className='container-fluid'>
-                            <div className='row g-3 my-2'>
-                                <div className="col-md-12">
-                                    <h4 className="text-center fw-bold text-white">Schedule Exam</h4>
-                                    <form action="">
-                                    <div className="row">
+                        <h4 className="text-center fw-bold text-white">Schedule Exam</h4>
+                        <Form onSubmit={handleSubmit}>
+      <ProgressBar now={(step / 2) * 100} className=""/>
+      {step === 1 && (
+        <Form.Group controlId="formStep1">
+           <div className="row mt-5">
                                         <div className="col-md-6">
                                         <div className="mb-3">
                                             <select name="course" className="form-control" id="">
@@ -92,14 +113,38 @@ function Aexam() {
                                         </div>
                                         </div>
                                     </div>
-                                        <div className="mb-3">
-                                            <a href="/AaddQuestions" type="submit" className="btn btn-primary">Schedule</a>
-                                            <button type="submit" className="btn btn-danger ms-2">Reset</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+        </Form.Group>
+      )}
+      {step === 2 && (
+        <Form.Group controlId="formStep2">
+          <h5 className="text-white">Add Questions</h5>
+          <Form.Control
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+      )}
+      
+      <div className="d-flex justify-content-between">
+        {step > 1 && (
+          <Button variant="secondary" onClick={handlePrevious}>
+            Previous
+          </Button>
+        )}
+        {step < 2 ? (
+          <Button variant="primary" onClick={handleNext}>
+            Next
+          </Button>
+        ) : (
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        )}
+      </div>
+    </Form>
+
                     </div>
 
                 </div>

@@ -1,0 +1,28 @@
+.button{
+    box-shadow: none;
+    width: 50%;
+    height: 40px;
+    background-color: #03A9F4;
+    color: #fff;
+    border-radius: 25px;
+    box-shadow: 3px 3px 3px #72bff1,
+        -3px -3px 3px #fff;
+    letter-spacing: 1.3px;
+}
+.button:hover {
+    background-color: #039BE5;
+}
+.custom-card {
+    width: 25rem;
+    margin-top: 50px;
+    border-color: #039BE5;
+    color: #1e000e;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  .data{
+    border-color: #039BE5;
+    border-width: 2px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  

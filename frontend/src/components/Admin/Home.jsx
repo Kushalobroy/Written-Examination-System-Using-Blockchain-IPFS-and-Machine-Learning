@@ -2,17 +2,18 @@ import React from 'react'
 import Nav from './Nav'
 import Chart from "chart.js/auto";
 import { Bar, Line } from "react-chartjs-2";
+import '../Style.css';
 function Home({ Toggle }) {
     return (
         <>
         <Nav Toggle={Toggle} />
-        <div className='px-3'>
+        <div className='px-3 '>
            
-            <div className='container-fluid'>
+            <div className='container-fluid '>
                 <div className='row g-3 my-2'>
-                    <div className='col-md-3'>
+                    <div className='col-md-3 '>
                         <div className='p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded'>
-                            <div>
+                            <div >
                                 <h3 className='fs-2'>10</h3>
                                 <p className='fs-5'>Ongoing Exam</p>
                             </div>
@@ -49,7 +50,7 @@ function Home({ Toggle }) {
 
                 </div>
             </div>
-            <div className='row'>
+            {/* <div className='row'>
                 <div className='col-md-5 bg-white ms-1'>
                 <BarChart />
                 </div>
@@ -57,7 +58,7 @@ function Home({ Toggle }) {
                 <LineChart />
                 </div>
             
-            </div>
+            </div> */}
 
 
         </div>

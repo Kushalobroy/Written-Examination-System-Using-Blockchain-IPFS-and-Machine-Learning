@@ -38,6 +38,7 @@
     "react-to-pdf": "^1.0.1",
     "react-toastify": "^10.0.4",
     "react-webcam": "^7.1.1",
+    "sweetalert2": "^11.10.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
