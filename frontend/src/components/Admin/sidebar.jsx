@@ -35,9 +35,9 @@ function Sidebar() {
                 <i className='bi bi-person-circle fs-5 me-3'></i>
                 <span>Add Admin</span>
             </a>
-            <a className='list-group-item py-2' href="">
-                <i className='bi bi-power fs-5 me-3'></i>
-                <span >Logout</span>
+            <a className='list-group-item py-2' href='/Asetting'>
+                <i className='bi bi-gear fs-5 me-3'></i>
+                <span >Setting</span>
             </a>
        </div>
     </div>

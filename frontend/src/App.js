@@ -14,6 +14,7 @@ import Aadd from './components/Admin/Aadd';
 import AaddQuestions from './components/Admin/AaddQuestions';
 
 import Eanswerbook from './components/Evaluator/Eanswerbook';
+import Asetting from './components/Admin/Asetting';
 
 
 // connect to the default API address http://localhost:5001
@@ -33,6 +34,7 @@ function App() {
           <Route path='/Aexam' element={<Aexam/>}/>
           <Route path='/Aadd' element={<Aadd/>}/>
           <Route path='/AaddQuestions' element={<AaddQuestions/>}/>
+          <Route path='/Asetting' element={<Asetting/>}/>
           {/* Student routes */}
           <Route path='/Student' element={<Shome />} />
           <Route path='/Exam' element={<Exam />} />
