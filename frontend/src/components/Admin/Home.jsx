@@ -23,28 +23,28 @@ function Home({ Toggle }) {
                     <div className='col-md-3'>
                         <div className='p-3 shadow-sm d-flex justify-content-around align-items-center rounded' style={{backgroundColor:'lightyellow'}}>
                             <div>
-                                <h3 className='fs-2'>1000</h3>
-                                <p className='fs-5'>Answerbook</p>
+                                <h3 className='fs-2'>200</h3>
+                                <p className='fs-5'>Evaluator</p>
                             </div>
-                            <i className='bi bi-journals p-3 fs-1'></i>
+                            <i className='bi bi-person-workspace p-3 fs-1'></i>
                         </div>
                     </div>
                     <div className='col-md-3'>
                         <div className='p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded' style={{backgroundColor:'darksalmon'}}>
                             <div>
                                 <h3 className='fs-2'>45602</h3>
-                                <p className='fs-5'>Submitted</p>
+                                <p className='fs-5'>Student</p>
                             </div>
-                            <i className='bi bi-journal-check p-3 fs-1'></i>
+                            <i className='bi bi-people-fill fs-1 me-3'></i>
                         </div>
                     </div>
                     <div className='col-md-3'>
                         <div className='p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded'>
                             <div>
-                                <h3 className='fs-2'>200</h3>
-                                <p className='fs-5'>Evaluator</p>
+                                <h3 className='fs-2'>4</h3>
+                                <p className='fs-5'>Admin</p>
                             </div>
-                            <i className='bi bi-person-workspace p-3 fs-1'></i>
+                            <i className='bi bi-person-circle me-3 fs-1'></i>
                         </div>
                     </div>
 
@@ -63,7 +63,7 @@ function Home({ Toggle }) {
                         <div className='p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded'>
                             <div>
                                 <h3 className='fs-2'>1000</h3>
-                                <p className='fs-5'>Answerbook</p>
+                                <p className='fs-5'>Answer Books</p>
                             </div>
                             <i className='bi bi-journals p-3 fs-1'></i>
                         </div>

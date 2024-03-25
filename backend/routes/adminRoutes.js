@@ -28,13 +28,14 @@ const upload = multer({ storage, fileFilter });
 
 
 router.get('/', adminController.getAllAdmins);
-
 router.post('/create', upload.single('photo'), adminController.createAdmin);
 router.post('/addStudent', upload.single('photo'), adminController.createStudent);
 router.get('/getAllStudent', adminController.getAllStudents);
 router.post('/addEvaluator', upload.single('photo'), adminController.createEvaluator);
 router.get('/getAllEvaluator', adminController.getEvaluators);
 router.get('/:id', adminController.getAdminById);
+router.post('/delete/:id', adminController.deleteAdmin);
+
 /*
 router.put('/:id', adminController.updateAdmin);
 router.delete('/:id', adminController.deleteAdmin);

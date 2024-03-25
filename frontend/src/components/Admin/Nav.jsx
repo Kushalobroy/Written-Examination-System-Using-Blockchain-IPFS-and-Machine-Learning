@@ -1,6 +1,7 @@
 import React from 'react'
 import 'bootstrap/js/dist/dropdown'
 import 'bootstrap/js/dist/collapse'
+import Logout from '../Logout'
 function nav({Toggle}) {
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-transparent">
@@ -17,7 +18,7 @@ function nav({Toggle}) {
                         </a>
                        <div className="dropdown-menu" aria-labelledby="dropdownId">
                            <li><a className="dropdown-item" href="">Profile</a></li> 
-                           <li><a className="dropdown-item" href="">Logout</a></li> 
+                           <li><Logout/></li> 
                         </div>
                         
                     </li>
