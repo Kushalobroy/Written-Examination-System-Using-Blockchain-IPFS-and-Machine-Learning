@@ -210,7 +210,7 @@ function Aadd() {
                                         <tbody>
                                         {admins.map((admin) => (
                                             <tr>
-                                                <td><img src={`http://localhost:5000/uploads/admin/${admin.photo.filename}`} alt={`Image for ${admin.name}`} style={{width:'80px', height:'80px',borderRadius:'50%'}}></img></td>
+                                                <td><img src={`http://localhost:5000/uploads/admin/${admin.photo.filename}`} alt={`Image for ${admin.name}`} style={{width:'80px', height:'80px',borderRadius:'50%', border: '1px solid black', }}></img></td>
                                                 <td>{admin.username}</td>
                                                 <td>{admin.name}</td>
                                                 <td>{admin.email}</td>

@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/js/dist/dropdown'
 import 'bootstrap/js/dist/collapse'
 import Logout from '../Logout'
-function nav({Toggle}) {
+const Nav = ({ Toggle }) => {
+    const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    // Retrieve user data from sessionStorage
+    const userDataString = sessionStorage.getItem('userData');
+    if (userDataString) {
+      const userDataObject = JSON.parse(userDataString);
+      setUserData(userDataObject);
+    }
+  }, []); // This effect runs only once, similar to componentDidMount()
+
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-transparent">
             <i className="navbar-brand bi bi-justify-left fs-4" onClick={Toggle}></i>
@@ -28,5 +39,5 @@ function nav({Toggle}) {
     )
 }
 
-export default nav
+export default Nav
 
