@@ -188,6 +188,7 @@ function Aadd() {
                                     <table className="table table-striped">
                                         <thead>
                                           <tr>
+                                            <th scope="col">Profile</th>
                                             <th scope="col">Username</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Email</th>
@@ -198,7 +199,7 @@ function Aadd() {
                                         <tbody>
                                         {admins.map((admin) => (
                                             <tr>
-                                                
+                                                <td><img src={`http://localhost:5000/uploads/admin/${admin.photo.filename}`} alt={`Image for ${admin.name}`} style={{width:'80px', height:'80px',borderRadius:'50%'}}></img></td>
                                                 <td>{admin.username}</td>
                                                 <td>{admin.name}</td>
                                                 <td>{admin.email}</td>
