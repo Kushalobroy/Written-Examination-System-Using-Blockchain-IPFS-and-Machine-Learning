@@ -1,6 +1,7 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Facerecognization from './components/Facerecognization';
 import Ahome from "./components/Admin/Ahome";
 import Ehome from "./components/Evaluator/Ehome";
@@ -16,6 +17,7 @@ import AaddQuestions from './components/Admin/AaddQuestions';
 import Eanswerbook from './components/Evaluator/Eanswerbook';
 import Asetting from './components/Admin/Asetting';
 import NotFound from './components/NotFound';
+import PageLoader from './components/PageLoader';
 
 
 // connect to the default API address http://localhost:5001
@@ -27,9 +29,34 @@ function App() {
   const isAdmin = userData && userData.role === 'admin';
   const isEvaluator = userData && userData.role === 'evaluator';
   const isStudent = userData && userData.role === 'student';
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const handleStartLoading = () => {
+      setLoading(true);
+    };
+
+    const handleStopLoading = () => {
+      setLoading(false);
+    };
+
+    const cleanup = () => {
+      // Remove listeners when component unmounts
+      window.removeEventListener('beforeunload', handleStartLoading);
+      window.removeEventListener('load', handleStopLoading);
+    };
+
+    window.addEventListener('beforeunload', handleStartLoading);
+    window.addEventListener('load', handleStopLoading);
+
+    return cleanup;
+  }, []);
   return (
     <div className="App">
       <Router>
+      <PageLoader loading={loading} />
+
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/Facerecognization' element={<Facerecognization/>}/>

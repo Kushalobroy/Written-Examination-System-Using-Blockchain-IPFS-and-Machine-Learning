@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebar from "./sidebar"
 import Nav from './Nav'
 import { Form, Button, ProgressBar } from 'react-bootstrap';
+import SubjectiveForm from "./SubjectiveForm";
+import ObjectiveForm from "./ObjectiveForm";
 function Aexam() {
     const [toggle, setToggle] = useState(true)
     const Toggle = () => {
@@ -19,15 +21,14 @@ function Aexam() {
   const handlePrevious = () => {
     setStep(step - 1);
   };
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     // handle form submission
+  };
+  const [examType, setExamType] = useState('');
+
+  const handleExamTypeChange = (event) => {
+    setExamType(event.target.value);
   };
     return (
         <div className="container-fluid bg-secondary min-vh-100">
@@ -109,6 +110,24 @@ function Aexam() {
                                         </div>
                                         <div className="col-md-6">
                                         <div className="mb-3">
+                                       
+        <select value={examType} onChange={handleExamTypeChange} className="form-select">
+          <option value="-1" selected>Exam Type</option>
+          <option value="subjective">Subjective</option>
+          <option value="objective">Objective</option>
+        </select>
+     
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                        <div className="mb-3">
+                                            <input className="form-control" type="time" name="duration" id="" />
+                                        </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                        <div className="mb-3">
                                             <input className="form-control" type="time" name="time"/>
                                         </div>
                                         </div>
@@ -118,12 +137,9 @@ function Aexam() {
       {step === 2 && (
         <Form.Group controlId="formStep2">
           <h5 className="text-white">Add Questions</h5>
-          <Form.Control
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-          />
+          
+      {examType === 'subjective' && <SubjectiveForm />}
+      {examType === 'objective' && <ObjectiveForm />}
         </Form.Group>
       )}
       

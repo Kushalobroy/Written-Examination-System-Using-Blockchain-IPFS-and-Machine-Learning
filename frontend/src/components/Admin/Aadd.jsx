@@ -5,8 +5,10 @@ import Sidebar from "./sidebar"
 import Nav from './Nav'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PageLoader from "../PageLoader";
 
 function Aadd() {
+  const [loading, setLoading] = useState(false);
     const [toggle, setToggle] = useState(true)
     const Toggle = () => {
         setToggle(!toggle)
@@ -28,8 +30,9 @@ function Aadd() {
       };
     
       const handleFormSubmit = async (event) => {
+       
         event.preventDefault();
-    
+        
         const data = new FormData();
     
         for (const key in formData) {
@@ -41,7 +44,7 @@ function Aadd() {
             }
           }
         }
-    
+       
         try {
           const response = await fetch('http://localhost:5000/api/admin/create', {
             method: 'POST',
@@ -59,13 +62,16 @@ function Aadd() {
         } catch (error) {
           console.error(error);
         }
+        
       };
     //Display Admin List
     const [admins, setAdmins] = useState([]);
 
   useEffect(() => {
     async function fetchAdmins() {
+      
       try {
+        setLoading(true);
         const response = await fetch('http://localhost:5000/api/admin',{
           method: 'GET',
           headers: {
@@ -81,6 +87,9 @@ function Aadd() {
         }
       } catch (error) {
         console.error('Network error: ' + error.message);
+      }
+      finally {
+        setLoading(false); // Stop the loader regardless of success or failure
       }
     }
 
@@ -115,6 +124,7 @@ function Aadd() {
     
     return (
       <><ToastContainer position="top-right" autoClose='3000'/>
+      
         <div className="container-fluid bg-secondary min-vh-100">
           
             <div className="row">
@@ -184,6 +194,7 @@ function Aadd() {
                                 </button>
                                         </div>
                                     </div>
+                                    <PageLoader loading={loading} />
                                 <div className="table table-responsive">
                                     <table className="table table-striped">
                                         <thead>
@@ -224,6 +235,7 @@ function Aadd() {
             </div>
         </div>
         </div>
+      
         </>
     )
 }
