@@ -41,7 +41,7 @@ function Astudent() {
         }
     
         try {
-          const response = await fetch('http://localhost:3000/api/admin/addStudent', {
+          const response = await fetch('http://localhost:5000/api/admin/addStudent', {
             method: 'POST',
             body: data,
           });
@@ -63,7 +63,7 @@ function Astudent() {
     useEffect(() => {
       async function fetchStudents() {
         try {
-          const response = await fetch('http://localhost:3000/api/admin/getAllStudent',{
+          const response = await fetch('http://localhost:5000/api/admin/getAllStudent',{
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',

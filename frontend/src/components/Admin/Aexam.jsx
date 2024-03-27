@@ -48,6 +48,7 @@ function Aexam() {
            <div className="row mt-5">
                                         <div className="col-md-6">
                                         <div className="mb-3">
+                                         
                                             <select name="course" className="form-control" id="">
                                                 <option value="-1" selected>Course</option>
                                                 <option value="1">B.tech</option>
@@ -111,7 +112,7 @@ function Aexam() {
                                         <div className="col-md-6">
                                         <div className="mb-3">
                                        
-        <select value={examType} onChange={handleExamTypeChange} className="form-select">
+        <select value={examType} onChange={handleExamTypeChange} className="form-select" required>
           <option value="-1" selected>Exam Type</option>
           <option value="subjective">Subjective</option>
           <option value="objective">Objective</option>
@@ -128,10 +129,18 @@ function Aexam() {
                                         </div>
                                         <div className="col-md-6">
                                         <div className="mb-3">
-                                            <input className="form-control" type="time" name="time"/>
+
+                                        <select id="duration" className="form-select" name="duration">
+                                        <option value="-1" selected>Duration</option>
+                                          <option value="1">1 hour</option>
+                                          <option value="2">2 hour</option>
+                                          <option value="3">3 hour</option>
+                                        
+                                        </select>
                                         </div>
                                         </div>
                                     </div>
+                                    <button type="submit" className="btn btn-warning"> Schedule</button>
         </Form.Group>
       )}
       {step === 2 && (

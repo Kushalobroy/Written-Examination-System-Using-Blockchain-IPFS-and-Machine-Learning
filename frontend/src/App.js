@@ -79,7 +79,7 @@ function App() {
           {isEvaluator && <Route path='/Eanswerbook' element={<Eanswerbook/>}/>}
           
           {/* 404 Not Found route */}
-          <Route path='*' element={<NotFound/>} />
+          <Route path='/' element={<Home/>} />
         </Routes>
       </Router>
     </div>

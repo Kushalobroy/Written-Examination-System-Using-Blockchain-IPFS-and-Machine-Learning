@@ -43,7 +43,7 @@ function Evaluator() {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/admin/addEvaluator', {
+      const response = await fetch('http://localhost:5000/api/admin/addEvaluator', {
         method: 'POST',
         body: data,
       });
@@ -65,7 +65,7 @@ const [evaluators, setEvaluators] = useState([]);
 useEffect(() => {
   async function fetchEvaluators() {
     try {
-      const response = await fetch('http://localhost:3000/api/admin/getAllEvaluator',{
+      const response = await fetch('http://localhost:5000/api/admin/getAllEvaluator',{
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -196,7 +196,7 @@ useEffect(() => {
                     {evaluators.map((evaluator,index) => (
                           <tr>
                               <td>{index + 1}</td>
-                              <td><img src={`http://localhost:3000/${evaluator.photo.filename}`} alt={`Image for ${evaluator.name}`} /></td>
+                              <td><img src={`http://localhost:5000/uploads/admin/${evaluator.photo.filename}`} alt={`Image for ${evaluator.name}`} style={{width:'80px', height:'80px',borderRadius:'50%', border: '1px solid black', }}/></td>
                               <td>{evaluator.email}</td>
                               <td>{evaluator.contact_no}</td>
                               <td>{evaluator.clg_name}</td>
