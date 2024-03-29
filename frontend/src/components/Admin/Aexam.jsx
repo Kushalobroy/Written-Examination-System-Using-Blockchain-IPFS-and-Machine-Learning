@@ -30,6 +30,45 @@ function Aexam() {
   const handleExamTypeChange = (event) => {
     setExamType(event.target.value);
   };
+  const [course, setCourse] = useState('');
+  const [branch, setBranch] = useState('');
+  const [subject, setSubject] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [duration, setDuration] = useState('');
+  const [semester, setSemester] = useState('');
+  const [loading, setLoading] = useState(false);
+  const handleSchedule = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await fetch('http://localhost:5000/api/admin/examSchedule', {
+        course,
+        branch,
+        subject,
+        date,
+        time,
+        duration,
+        examType,
+        semester,
+        method: 'POST',
+      });
+
+      if (response.data && response.data.success) {
+        console.log('Response:', response);
+
+        alert('Exam scheduled successfully!');
+      } else {
+        alert('Failed to schedule exam. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error scheduling exam:', error);
+      alert('Failed to schedule exam. Please try again.');
+    }
+
+    setLoading(false);
+  };
     return (
         <div className="container-fluid bg-secondary min-vh-100">
             <div className="row">
@@ -41,32 +80,34 @@ function Aexam() {
                     <div className="px-3">
                         <Nav Toggle={Toggle} />
                         <h4 className="text-center fw-bold text-white">Schedule Exam</h4>
-                        <Form onSubmit={handleSubmit}>
+                       
       <ProgressBar now={(step / 2) * 100} className=""/>
+      
       {step === 1 && (
+        <Form onSubmit={handleSchedule}>
         <Form.Group controlId="formStep1">
            <div className="row mt-5">
                                         <div className="col-md-6">
                                         <div className="mb-3">
                                          
-                                            <select name="course" className="form-control" id="">
+                                            <select name="course" className="form-control" id="" value={course} onChange={(e) => setCourse(e.target.value)}>
                                                 <option value="-1" selected>Course</option>
-                                                <option value="1">B.tech</option>
-                                                <option value="2">B.pharma</option>
-                                                <option value="3">B.A.</option>
-                                                <option value="3">B.S.C</option>
-                                                <option value="3">M.Tech</option>
-                                                <option value="3">M.pharma</option>
+                                                <option value="Btech">B.tech</option>
+                                                <option value="Bpharma">B.pharma</option>
+                                                <option value="BA">B.A.</option>
+                                                <option value="BSC">B.S.C</option>
+                                                <option value="Mtech">M.Tech</option>
+                                                <option value="Mpharma">M.pharma</option>
                                             </select>
                                         </div>
                                         </div>
                                         <div className="col-md-6">
                                         <div className="mb-3">
-                                            <select name="branch" className="form-control" id="">
+                                            <select name="branch" className="form-control" id="" value={branch} onChange={(e) => setBranch(e.target.value)}>
                                                 <option value="-1" selected>Branch</option>
-                                                <option value="13">Information Technology</option>
-                                                <option value="40">Mechanical Engineering</option>
-                                                <option value="00">Civil Engineering</option>
+                                                <option value="IT">Information Technology</option>
+                                                <option value="ME">Mechanical Engineering</option>
+                                                <option value="CE">Civil Engineering</option>
                                             </select>
                                         </div>
                                         </div>
@@ -74,22 +115,22 @@ function Aexam() {
                                     <div className="row">
                                         <div className="col-md-6">
                                         <div className="mb-3">
-                                            <select name="subject" className="form-control" id="">
+                                            <select name="subject" className="form-control" id="" value={subject} onChange={(e) => setSubject(e.target.value)} >
                                                 <option value="-1" selected>Subject</option>
-                                                <option value="11">DSA</option>
-                                                <option value="22">Computer Network</option>
-                                                <option value="33">Design Thinking</option>
-                                                <option value="44">Cryptography</option>
-                                                <option value="55">Constitution</option>
-                                                <option value="66">PPS</option>
-                                                <option value="77">Math-4</option>
+                                                <option value="DSA">DSA</option>
+                                                <option value="Computer Network">Computer Network</option>
+                                                <option value="Design Thinking">Design Thinking</option>
+                                                <option value="Cryptography">Cryptography</option>
+                                                <option value="Constitution">Constitution</option>
+                                                <option value="PPS">PPS</option>
+                                                <option value="Math-4">Math-4</option>
                                             </select>
                                         </div>
                                         </div>
                                         <div className="col-md-6">
                                             
                                         <div className="mb-3">
-                                            <select name="semester" className="form-control" id="">
+                                            <select name="semester" className="form-control" id=""  value={semester} onChange={(e) => setSemester(e.target.value)}>
                                                 <option value="-1" selected>Semester</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
@@ -106,7 +147,7 @@ function Aexam() {
                                     <div className="row">
                                         <div className="col-md-6">
                                         <div className="mb-3">
-                                            <input className="form-control" type="date" name="date" id="" />
+                                            <input className="form-control" type="date" name="date" id="" value={date} onChange={(e) => setDate(e.target.value)} />
                                         </div>
                                         </div>
                                         <div className="col-md-6">
@@ -124,13 +165,13 @@ function Aexam() {
                                     <div className="row">
                                         <div className="col-md-6">
                                         <div className="mb-3">
-                                            <input className="form-control" type="time" name="duration" id="" />
+                                            <input className="form-control" type="time" name="time" id="" value={time} onChange={(e) => setTime(e.target.value)} />
                                         </div>
                                         </div>
                                         <div className="col-md-6">
                                         <div className="mb-3">
 
-                                        <select id="duration" className="form-select" name="duration">
+                                        <select id="duration" className="form-select" name="duration" value={duration} onChange={(e) => setDuration(e.target.value)}>
                                         <option value="-1" selected>Duration</option>
                                           <option value="1">1 hour</option>
                                           <option value="2">2 hour</option>
@@ -142,7 +183,11 @@ function Aexam() {
                                     </div>
                                     <button type="submit" className="btn btn-warning"> Schedule</button>
         </Form.Group>
+        </Form>
+
       )}
+      
+       <Form onSubmit={handleSubmit}>
       {step === 2 && (
         <Form.Group controlId="formStep2">
           <h5 className="text-white">Add Questions</h5>

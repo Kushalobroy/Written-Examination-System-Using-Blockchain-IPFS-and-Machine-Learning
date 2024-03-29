@@ -1,40 +1,53 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 contract ExamScheduler {
     struct Exam {
+        uint256 id;
+        string course;
+        string branch;
+        string subject;
         uint256 date;
-        uint256 startTime;
-        uint256 duration; // Duration of the exam in seconds
-        string questions; // Store a reference to the questions
-        bool submitted;
+        uint256 time;
+        uint256 duration;
+        string examType; // subjective or objective
+        string semester; // semester
     }
 
-    mapping(string => mapping(string => mapping(string => Exam))) public exams;
-    mapping(uint256 => bool) public scheduledExams;
+    mapping(uint256 => Exam) public exams;
+    uint256 public examCount;
 
-    event ExamScheduled(address indexed student, string course, string branch, string subject, uint256 date, uint256 startTime, uint256 duration);
-    event ExamSubmitted(address indexed student, string course, string branch, string subject);
+    // Events
+    event ExamScheduled(uint256 indexed id, string course, string branch, string subject);
 
-    function scheduleExam(string memory _course, string memory _branch, string memory _subject, uint256 _date, uint256 _startTime, uint256 _duration, string memory _questions) public {
-        require(!exams[_course][_branch][_subject].submitted, "Exam already scheduled");
-
-        exams[_course][_branch][_subject] = Exam(_date, _startTime, _duration, _questions, false);
-        scheduledExams[_date] = true;
-
-        emit ExamScheduled(msg.sender, _course, _branch, _subject, _date, _startTime, _duration);
+    // Function to schedule exams
+    function scheduleExam(
+        string memory _course,
+        string memory _branch,
+        string memory _subject,
+        uint256 _date,
+        uint256 _time,
+        uint256 _duration,
+        string memory _examType,
+        string memory _semester
+    ) external {
+        examCount++;
+        exams[examCount] = Exam(examCount, _course, _branch, _subject, _date, _time, _duration, _examType, _semester);
+        emit ExamScheduled(examCount, _course, _branch, _subject);
     }
 
-    function submitExam(string memory _course, string memory _branch, string memory _subject) public {
-        Exam storage exam = exams[_course][_branch][_subject];
-        require(exam.date > 0, "No exam scheduled");
-        require(block.timestamp >= exam.date + exam.startTime + exam.duration, "Exam not yet due");
-        require(!exam.submitted, "Exam already submitted");
-        
-        exam.submitted = true;
-        emit ExamSubmitted(msg.sender, _course, _branch, _subject);
-    }
-
-    function isExamScheduledForDate(uint256 _date) public view returns (bool) {
-        return scheduledExams[_date];
+    // Function to check if an exam is scheduled for a particular date with specific course, branch, and semester
+    function isExamScheduled(string memory _course, string memory _branch, string memory _semester, uint256 _date) external view returns (bool) {
+        for (uint256 i = 1; i <= examCount; i++) {
+            if (
+                keccak256(abi.encodePacked(exams[i].course)) == keccak256(abi.encodePacked(_course)) &&
+                keccak256(abi.encodePacked(exams[i].branch)) == keccak256(abi.encodePacked(_branch)) &&
+                keccak256(abi.encodePacked(exams[i].semester)) == keccak256(abi.encodePacked(_semester)) &&
+                exams[i].date == _date
+            ) {
+                return true;
+            }
+        }
+        return false;
     }
 }

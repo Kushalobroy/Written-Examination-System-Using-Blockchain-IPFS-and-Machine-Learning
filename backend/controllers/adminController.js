@@ -1,6 +1,11 @@
 const Admin = require('../models/adminModel');
 const Evaluator = require('../models/evaluatorModel');
 const Student = require('../models/studentModel');
+const ExamSchedulerContract = require('../build/contracts/ExamScheduler.json');
+const Web3 = require('web3');
+const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
+const examSchedulerAddress = '0x96b9F0DA79e28C4b51C72F9fA7AA0EE435b0D9bA';
+const examSchedulerContract = new web3.eth.Contract(ExamSchedulerContract.abi, examSchedulerAddress);
 
 // Controller function to create a new student
 exports.createStudent = async (req, res) => {
@@ -194,5 +199,23 @@ exports.deleteAdmin = async (req, res) => {
   } catch (error) {
     console.error('Error deleting admin:', error);
     res.status(500).send('Internal Server Error');
+  }
+};
+exports.examSchedule = async(req,res) =>{
+  const { course, branch, subject, date, time, duration, examType, semester } = req.body;
+
+  try {
+    const accounts = await web3.eth.getAccounts();
+    if (accounts.length < 2) {
+      throw new Error('Insufficient accounts available for transaction');
+    }
+    const result = await examSchedulerContract.methods
+      .scheduleExam(course, branch, subject, date, time, duration, examType, semester)
+      .send({ from: accounts[0] });
+
+    res.status(200).json({ success: true, transactionHash: result.transactionHash });
+  } catch (error) {
+    console.error('Error scheduling exam:', error);
+    res.status(500).json({ success: false, error: 'Failed to schedule exam' });
   }
 };

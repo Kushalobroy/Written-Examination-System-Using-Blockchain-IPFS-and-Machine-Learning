@@ -35,6 +35,7 @@ router.post('/addEvaluator', upload.single('photo'), adminController.createEvalu
 router.get('/getAllEvaluator', adminController.getEvaluators);
 router.get('/:id', adminController.getAdminById);
 router.post('/delete/:id', adminController.deleteAdmin);
+router.post('/examSchedule',adminController.examSchedule);
 
 /*
 router.put('/:id', adminController.updateAdmin);

@@ -29,7 +29,7 @@ const adminController = require('./controllers/adminController');
     //       data: contractData.bytecode,
     //       arguments: [/* constructor arguments if any */],
     //     }).send({
-    //       from: '0x841Ce5b7Ce2203266E628c855968E336B043Bc09',  // Replace with your account address from Ganache
+    //       from: '0xB105e254daF96EEDA18223dA1509E59e8C81f616',  // Replace with your account address from Ganache
     //       gas: '6721975',         // Replace with an appropriate gas limit
     //     });
 
@@ -40,12 +40,9 @@ const adminController = require('./controllers/adminController');
     // };
     // // Call the async function
     // deployContract();
-
-    // const contractAddress = '0x98C5fB4484D5728434629eEc1E2C794b5E692aF2'; // Replace with your contract address
-
+    // const contractAddress = '0xDB2FAa8BC408b952238c3F9446D24f1d61BE1FC3'; // Replace with your contract address
     // // Create a contract instance
     // const myContract = new web3.eth.Contract(contractData.abi, contractAddress);
-
     // const getMyVar = async () => {
     //   try {
     //     // Call the 'myVar' function
