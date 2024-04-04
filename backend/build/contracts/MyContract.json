@@ -261,15 +261,15 @@
     "absolutePath": "project:/contracts/MyContract.sol",
     "exportedSymbols": {
       "MyContract": [
-        186
+        244
       ]
     },
-    "id": 187,
+    "id": 245,
     "license": "UNLICENSED",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 175,
+        "id": 233,
         "literals": [
           "solidity",
           "^",
@@ -286,9 +286,9 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 186,
+        "id": 244,
         "linearizedBaseContracts": [
-          186
+          244
         ],
         "name": "MyContract",
         "nameLocation": "95:10:1",
@@ -297,12 +297,12 @@
           {
             "constant": false,
             "functionSelector": "c6b91540",
-            "id": 177,
+            "id": 235,
             "mutability": "mutable",
             "name": "myVar",
             "nameLocation": "157:5:1",
             "nodeType": "VariableDeclaration",
-            "scope": 186,
+            "scope": 244,
             "src": "145:17:1",
             "stateVariable": true,
             "storageLocation": "default",
@@ -311,7 +311,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 176,
+              "id": 234,
               "name": "uint",
               "nodeType": "ElementaryTypeName",
               "src": "145:4:1",
@@ -324,23 +324,23 @@
           },
           {
             "body": {
-              "id": 184,
+              "id": 242,
               "nodeType": "Block",
               "src": "185:30:1",
               "statements": [
                 {
                   "expression": {
-                    "id": 182,
+                    "id": 240,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
-                      "id": 180,
+                      "id": 238,
                       "name": "myVar",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 177,
+                      "referencedDeclaration": 235,
                       "src": "196:5:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -351,7 +351,7 @@
                     "operator": "=",
                     "rightHandSide": {
                       "hexValue": "313030",
-                      "id": 181,
+                      "id": 239,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -371,13 +371,13 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 183,
+                  "id": 241,
                   "nodeType": "ExpressionStatement",
                   "src": "196:11:1"
                 }
               ]
             },
-            "id": 185,
+            "id": 243,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
@@ -385,25 +385,25 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 178,
+              "id": 236,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "182:2:1"
             },
             "returnParameters": {
-              "id": 179,
+              "id": 237,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "185:0:1"
             },
-            "scope": 186,
+            "scope": 244,
             "src": "171:44:1",
             "stateMutability": "nonpayable",
             "virtual": false,
             "visibility": "public"
           }
         ],
-        "scope": 187,
+        "scope": 245,
         "src": "86:132:1",
         "usedErrors": []
       }
@@ -416,7 +416,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.13",
-  "updatedAt": "2024-03-29T11:24:26.784Z",
+  "updatedAt": "2024-04-04T10:36:57.427Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

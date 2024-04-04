@@ -13,8 +13,8 @@ const Web3 = require('web3');
           data: contractData.bytecode,
           arguments: [/* constructor arguments if any */],
         }).send({
-          from: '0xB105e254daF96EEDA18223dA1509E59e8C81f616',  // Replace with your account address from Ganache
-          gas: '6721975',         // Replace with an appropriate gas limit
+          from: '0x66182d7e86FF993D9c4831b15A283f263aF95878',  // Replace with your account address from Ganache
+          gas: '10000000',         // Replace with an appropriate gas limit
         });
 
         console.log('Contract deployed at address:', deployedContract.options.address);
@@ -23,8 +23,8 @@ const Web3 = require('web3');
       }
     };
     // Call the async function
-    deployContract();
-    const contractAddress = '0xeC12b046BD1Eb619C9A6d968cb8902A5f27726C9'; // Replace with your contract address
+// deployContract();
+    const contractAddress = '0xB298E63442FD5E84dFAaeF83E19e58899fA0Db30'; // Replace with your contract address
     // Create a contract instance
     const myContract = new web3.eth.Contract(contractData.abi, contractAddress);
     
@@ -33,24 +33,32 @@ contract.options.address = contractAddress;
 // Dummy data for scheduling an exam
 
 const examData = {
-    course: 'Mathematics',
-    branch: 'Computer Science',
-    subject: 'Algebra',
-    date: Math.floor(Date.now() / 1000), // Current timestamp
-    time: 900, // 15:00 in seconds (15 * 60)
-    duration: 3600, // 1 hour in seconds
-    examType: 'Objective',
-    semester: 'Spring 2024'
+    course: 'Btech',
+  branch: 'IT',
+  subject: 'Design Thinking',
+  date: Math.floor(new Date("2024-04-07").getTime() / 1000),
+  time: 58860,
+  duration: 3600,
+  examType: 'subjective',
+  semester: '3'
 };
-console.log(Math.floor(Date.now() / 1000));
-// Function to schedule an exam
+
+
+const examDate = new Date(examData.date);
+
+// Check if the date is valid
+if (!isNaN(examDate.getTime())) {
+    console.log("Date:", examDate.toISOString().split('T')[0]); // Output the formatted date
+} else {
+    console.log("Invalid Date");
+}
 async function scheduleExam() {
     try {
         // Get accounts from the node
         const accounts = await web3.eth.getAccounts();
 
         // Prepare transaction data
-        const txData = contract.methods.scheduleExam(
+        const txData = myContract.methods.scheduleExam(
             examData.course,
             examData.branch,
             examData.subject,
@@ -77,20 +85,23 @@ async function scheduleExam() {
 }
 
 // Call the scheduleExam function
-// scheduleExam();
+scheduleExam();
 
 const testData = {
-    course: 'Mathematics',
-    branch: 'Computer Science',
-    semester: 'Spring 2024',
-    date:Math.floor(Date.now() / 1000)
+    course: examData.course,
+    branch: examData.branch,
+    subject: examData.subject,
+    semester: examData.semester,
+    date: examData.date, // Use the same date as examData
+    time: examData.time, // Use the same time as examData
 };
+
 
 // Function to check if an exam is scheduled
 async function isExamScheduled() {
     try {
         // Call the contract function
-        const isScheduled = await contract.methods.isExamScheduled(
+        const isScheduled = await myContract.methods.isExamScheduled(
             testData.course,
             testData.branch,
             testData.semester,
@@ -104,4 +115,31 @@ async function isExamScheduled() {
 }
 // Call the isExamScheduled function
 isExamScheduled();
+
+async function displayAllScheduledExams() {
+    try {
+        const scheduledExamIds = await myContract.methods.getAllScheduledExams().call();
+        for (let i = 0; i < scheduledExamIds.length; i++) {
+            const examId = scheduledExamIds[i];
+            const examDetails = await myContract.methods.exams(examId).call();
+            console.log("Exam ID:", examDetails.id);
+            console.log("Course:", examDetails.course);
+            console.log("Branch:", examDetails.branch);
+            console.log("Subject:", examDetails.subject);
+            console.log("Date:", new Date(examDetails.date * 1000)); // Convert UNIX timestamp to JavaScript Date object
+            console.log("Time:", examDetails.time);
+            console.log("Duration:", examDetails.duration);
+            console.log("Exam Type:", examDetails.examType);
+            console.log("Semester:", examDetails.semester);
+            console.log("---------------------------");
+            // You can display these details on your frontend UI as well
+        }
+    } catch (error) {
+        console.error("Error fetching exam details:", error);
+    }
+}
+
+// Call the function to display all scheduled exams
+displayAllScheduledExams();
+
     require('dotenv').config();

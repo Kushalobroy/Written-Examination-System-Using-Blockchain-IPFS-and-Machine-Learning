@@ -38,23 +38,39 @@ function Aexam() {
   const [duration, setDuration] = useState('');
   const [semester, setSemester] = useState('');
   const [loading, setLoading] = useState(false);
+   const handleDurationChange = (e) => {
+    const selectedDuration = parseInt(e.target.value); // Parse the selected value to an integer
+    const durationInSeconds = selectedDuration * 3600; // Convert hours to seconds
+    setDuration(durationInSeconds);
+  };
+  const handleTimeChange = (e) => {
+    const inputTime = e.target.value; // input time in format "HH:MM"
+    const [hours, minutes] = inputTime.split(':').map(Number); // split hours and minutes
+    const timeInSeconds = (hours * 60 + minutes) * 60; // convert to seconds
+    setTime(timeInSeconds);
+  };
   const handleSchedule = async (event) => {
     event.preventDefault();
     setLoading(true);
 
     try {
       const response = await fetch('http://localhost:5000/api/admin/examSchedule', {
-        course,
-        branch,
-        subject,
-        date,
-        time,
-        duration,
-        examType,
-        semester,
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          course,
+          branch,
+          subject,
+          date,
+          time,
+          duration,
+          examType,
+          semester
+        })
       });
-
+      
       if (response.data && response.data.success) {
         console.log('Response:', response);
 
@@ -84,8 +100,8 @@ function Aexam() {
       <ProgressBar now={(step / 2) * 100} className=""/>
       
       {step === 1 && (
-        <Form onSubmit={handleSchedule}>
-        <Form.Group controlId="formStep1">
+        <Form onSubmit={handleSchedule} controlId="formStep1">
+  
            <div className="row mt-5">
                                         <div className="col-md-6">
                                         <div className="mb-3">
@@ -165,13 +181,13 @@ function Aexam() {
                                     <div className="row">
                                         <div className="col-md-6">
                                         <div className="mb-3">
-                                            <input className="form-control" type="time" name="time" id="" value={time} onChange={(e) => setTime(e.target.value)} />
+                                            <input className="form-control" type="time" name="time" id="" value={time}  onChange={handleTimeChange}/>
                                         </div>
                                         </div>
                                         <div className="col-md-6">
                                         <div className="mb-3">
 
-                                        <select id="duration" className="form-select" name="duration" value={duration} onChange={(e) => setDuration(e.target.value)}>
+                                        <select id="duration" className="form-select" name="duration" value={duration}  onChange={handleDurationChange}>
                                         <option value="-1" selected>Duration</option>
                                           <option value="1">1 hour</option>
                                           <option value="2">2 hour</option>
@@ -181,8 +197,8 @@ function Aexam() {
                                         </div>
                                         </div>
                                     </div>
-                                    <button type="submit" className="btn btn-warning"> Schedule</button>
-        </Form.Group>
+       
+        <button type="submit" className="btn btn-warning"> Schedule</button>
         </Form>
 
       )}

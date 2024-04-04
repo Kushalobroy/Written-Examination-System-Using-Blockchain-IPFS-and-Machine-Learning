@@ -4,7 +4,7 @@ const Student = require('../models/studentModel');
 const ExamSchedulerContract = require('../build/contracts/ExamScheduler.json');
 const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
-const examSchedulerAddress = '0x96b9F0DA79e28C4b51C72F9fA7AA0EE435b0D9bA';
+const examSchedulerAddress = '0xB298E63442FD5E84dFAaeF83E19e58899fA0Db30';
 const examSchedulerContract = new web3.eth.Contract(ExamSchedulerContract.abi, examSchedulerAddress);
 
 // Controller function to create a new student
@@ -202,7 +202,9 @@ exports.deleteAdmin = async (req, res) => {
   }
 };
 exports.examSchedule = async(req,res) =>{
-  const { course, branch, subject, date, time, duration, examType, semester } = req.body;
+  let { course, branch, subject, date, time, duration, examType, semester } = req.body;
+console.log(req.body);
+date = Math.floor(new Date(date).getTime() / 1000);
 
   try {
     const accounts = await web3.eth.getAccounts();
