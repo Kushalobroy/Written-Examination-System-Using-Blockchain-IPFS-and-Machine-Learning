@@ -1,24 +1,55 @@
 import React, { useEffect, useRef, useState } from 'react';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const LiveProctoring = () => {
   const videoRef = useRef(null);
+  const [motionDetected, setMotionDetected] = useState(false);
 
   useEffect(() => {
     const constraints = {
       video: true,
     };
 
-    // Access webcam feed
+    const handleMotionDetection = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      canvas.width = videoRef.current.videoWidth;
+      canvas.height = videoRef.current.videoHeight;
+      ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+      const currentFrame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+      if (previousFrame) {
+        let totalDiff = 0;
+
+        for (let i = 0; i < currentFrame.data.length; i += 4) {
+          const diff = Math.abs(currentFrame.data[i] - previousFrame.data[i]) +
+            Math.abs(currentFrame.data[i + 1] - previousFrame.data[i + 1]) +
+            Math.abs(currentFrame.data[i + 2] - previousFrame.data[i + 2]);
+          totalDiff += diff;
+        }
+
+        const averageDiff = totalDiff / (currentFrame.data.length / 4);
+        if (averageDiff > motionDetectionThreshold) {
+          setMotionDetected(true);
+        } else {
+          setMotionDetected(false);
+        }
+      }
+
+      previousFrame = currentFrame;
+    };
+
     navigator.mediaDevices.getUserMedia(constraints)
       .then(stream => {
         videoRef.current.srcObject = stream;
+        setInterval(handleMotionDetection, motionDetectionInterval); // Call motion detection function at regular intervals
       })
       .catch(error => {
         console.error('Error accessing webcam:', error);
       });
 
     return () => {
-      // Stop video stream when component unmounts
       const stream = videoRef.current.srcObject;
       if (stream) {
         const tracks = stream.getTracks();
@@ -29,11 +60,18 @@ const LiveProctoring = () => {
     };
   }, []);
 
+  const motionDetectionThreshold = 500; // Adjust as needed
+  const motionDetectionInterval = 5000; // Adjust as needed
+  let previousFrame = null;
+
   return (
+    <><ToastContainer position="top-right" autoClose='3000'/>
     <div className="live-proctoring-container">
       <video ref={videoRef} autoPlay muted className="webcam-feed"></video>
+      {motionDetected && <div className="motion-warning"></div>}
       <Timer />
     </div>
+    </>
   );
 };
 
