@@ -13,7 +13,7 @@ const Web3 = require('web3');
           data: contractData.bytecode,
           arguments: [/* constructor arguments if any */],
         }).send({
-          from: '0x66182d7e86FF993D9c4831b15A283f263aF95878',  // Replace with your account address from Ganache
+          from: '0x94Aa5733aBB57118A64Cb6d67B538c4424739a8F',  // Replace with your account address from Ganache
           gas: '10000000',         // Replace with an appropriate gas limit
         });
 
@@ -23,7 +23,7 @@ const Web3 = require('web3');
       }
     };
     // Call the async function
-// deployContract();
+deployContract();
     const contractAddress = '0xB298E63442FD5E84dFAaeF83E19e58899fA0Db30'; // Replace with your contract address
     // Create a contract instance
     const myContract = new web3.eth.Contract(contractData.abi, contractAddress);

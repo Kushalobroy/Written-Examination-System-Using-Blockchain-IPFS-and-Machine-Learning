@@ -68,7 +68,7 @@ const LiveProctoring = () => {
     <><ToastContainer position="top-right" autoClose='3000'/>
     <div className="live-proctoring-container">
       <video ref={videoRef} autoPlay muted className="webcam-feed"></video>
-      {motionDetected && <div className="motion-warning"></div>}
+      {motionDetected && <div className="motion-warning">Warning: Motion Detected!</div>}
       <Timer />
     </div>
     </>
