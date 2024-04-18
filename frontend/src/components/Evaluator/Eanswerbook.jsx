@@ -23,8 +23,7 @@ function Eanswerbook() {
                                 <h4 className="text-center text-white fw-bold">Answer Books</h4>
                                 <table className="table table-striped">
                                     <thead>
-                                        <th>Course</th>
-                                        <th>Branch</th>
+                                       
                                         <th>Subject</th>
                                         <th>Roll No.</th>
                                         <th>Status</th>
@@ -32,32 +31,28 @@ function Eanswerbook() {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>B.tech</td>
-                                            <td>IT</td>
+                                         
                                             <td>Data Structures</td>
                                             <td>2007360130031</td>
                                             <td className="text-warning">Unchecked</td>
                                             <td><a className="btn btn-success" href="">Check</a></td>
                                         </tr>
                                         <tr>
-                                            <td>B.tech</td>
-                                            <td>IT</td>
+                                           
                                             <td>Data Structures</td>
                                             <td>2007360130031</td>
                                             <td className="text-warning">Unchecked</td>
                                             <td><a className="btn btn-success" href="">Check</a></td>
                                         </tr>
                                         <tr>
-                                            <td>B.tech</td>
-                                            <td>IT</td>
+                                            
                                             <td>Data Structures</td>
                                             <td>2007360130031</td>
                                             <td className="text-warning">Unchecked</td>
                                             <td><a className="btn btn-success" href="">Check</a></td>
                                         </tr>
                                         <tr>
-                                            <td>B.tech</td>
-                                            <td>IT</td>
+                                           
                                             <td>Data Structures</td>
                                             <td>2007360130031</td>
                                             <td className="text-warning">Unchecked</td>

@@ -1,9 +1,33 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import Nav from './Nav'
 import Chart from "chart.js/auto";
 import { Bar, Line } from "react-chartjs-2";
 import '../Style.css';
 function Home({ Toggle }) {
+    const [totalStudent, setTotalStudent] = useState([]);
+    const [totalEvaluator, setTotalEvaluator] = useState([]);
+    const [totalAdmin, setTotalAdmin] = useState([]);
+    // Add state for other data if needed
+  
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch('http://localhost:5000/api/admin/home');
+            if (!response.ok) {
+              throw new Error('Failed to fetch data');
+            }
+            const { student, admin, evaluator /* Add other data here */ } = await response.json();
+            setTotalStudent(student);
+            setTotalEvaluator(evaluator);
+            setTotalAdmin(admin);
+            // Set state for other data if needed
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        };
+    
+        fetchData();
+      }, []);
     return (
         <>
         <Nav Toggle={Toggle} />
@@ -23,7 +47,7 @@ function Home({ Toggle }) {
                     <div className='col-md-3'>
                         <div className='p-3 shadow-sm d-flex justify-content-around align-items-center rounded' style={{backgroundColor:'lightyellow'}}>
                             <div>
-                                <h3 className='fs-2'>200</h3>
+                                <h3 className='fs-2'>{totalEvaluator}</h3>
                                 <p className='fs-5'>Evaluator</p>
                             </div>
                             <i className='bi bi-person-workspace p-3 fs-1'></i>
@@ -32,7 +56,7 @@ function Home({ Toggle }) {
                     <div className='col-md-3'>
                         <div className='p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded' style={{backgroundColor:'darksalmon'}}>
                             <div>
-                                <h3 className='fs-2'>45602</h3>
+                                <h3 className='fs-2'>{totalStudent}</h3>
                                 <p className='fs-5'>Student</p>
                             </div>
                             <i className='bi bi-people-fill fs-1 me-3'></i>
@@ -41,7 +65,7 @@ function Home({ Toggle }) {
                     <div className='col-md-3'>
                         <div className='p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded'>
                             <div>
-                                <h3 className='fs-2'>4</h3>
+                                <h3 className='fs-2'>{totalAdmin}</h3>
                                 <p className='fs-5'>Admin</p>
                             </div>
                             <i className='bi bi-person-circle me-3 fs-1'></i>

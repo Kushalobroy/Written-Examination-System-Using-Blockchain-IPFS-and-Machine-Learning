@@ -13,7 +13,7 @@ const Web3 = require('web3');
           data: contractData.bytecode,
           arguments: [/* constructor arguments if any */],
         }).send({
-          from: '0x94Aa5733aBB57118A64Cb6d67B538c4424739a8F',  // Replace with your account address from Ganache
+          from: '0xf8dbEAF28439984192F2a7E1B1f854a41C3B56a2',  // Replace with your account address from Ganache
           gas: '10000000',         // Replace with an appropriate gas limit
         });
 

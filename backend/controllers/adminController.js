@@ -8,6 +8,20 @@ const examSchedulerAddress = '0xB298E63442FD5E84dFAaeF83E19e58899fA0Db30';
 const examSchedulerContract = new web3.eth.Contract(ExamSchedulerContract.abi, examSchedulerAddress);
 
 // Controller function to create a new student
+exports.home = async(req, res) => {
+  try {
+   
+    const student = await Student.countDocuments();
+    const evaluator = await Evaluator.countDocuments();
+    const admin = await Admin.countDocuments();
+    res.json({ student, evaluator, admin });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+
 exports.createStudent = async (req, res) => {
   try {
     const {

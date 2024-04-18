@@ -145,21 +145,21 @@ app.post('/api/login', async (req, res) => {
     const admin = await Admin.findOne({ username });
     if (admin && await bcrypt.compare(password, admin.password)) {
       req.session.user = { id: admin._id, role: 'admin' };
-      return res.json({ id: admin._id, role: 'admin' });
+      return res.json({ id: admin._id, role: 'admin',username: admin.username });
     }
 
     // Check against Evaluator collection
     const evaluator = await Evaluator.findOne({ username });
     if (evaluator && await bcrypt.compare(password, evaluator.password)) {
       req.session.user = { id: evaluator._id, role: 'evaluator' };
-      return res.json({ id: evaluator._id, role: 'evaluator' });
+      return res.json({ id: evaluator._id, role: 'evaluator', username: evaluator.username });
     }
 
     // Check against Student collection
     const student = await Student.findOne({ username });
     if (student && await bcrypt.compare(password, student.password)) {
       req.session.user = { id: student._id, role: 'student' };
-      return res.json({ id: student._id, role: 'student' });
+      return res.json({ id: student._id, role: 'student',username: student.name });
     }
 
     res.status(401).json({ error: 'Invalid credentials' });

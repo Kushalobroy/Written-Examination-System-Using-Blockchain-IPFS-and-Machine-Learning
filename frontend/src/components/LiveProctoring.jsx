@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Swal from 'sweetalert2';
 const LiveProctoring = () => {
   const videoRef = useRef(null);
   const [motionDetected, setMotionDetected] = useState(false);
@@ -31,6 +32,7 @@ const LiveProctoring = () => {
 
         const averageDiff = totalDiff / (currentFrame.data.length / 4);
         if (averageDiff > motionDetectionThreshold) {
+          toast.error("Motion Detected");
           setMotionDetected(true);
         } else {
           setMotionDetected(false);
@@ -60,8 +62,8 @@ const LiveProctoring = () => {
     };
   }, []);
 
-  const motionDetectionThreshold = 500; // Adjust as needed
-  const motionDetectionInterval = 5000; // Adjust as needed
+  const motionDetectionThreshold = 100; // Adjust as needed
+  const motionDetectionInterval = 800; // Adjust as needed
   let previousFrame = null;
 
   return (

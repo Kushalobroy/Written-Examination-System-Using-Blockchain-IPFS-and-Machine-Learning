@@ -5,6 +5,7 @@ import Logout from '../Logout'
 const Nav = ({ Toggle }) => {
     const [userData, setUserData] = useState(null);
 
+    
   useEffect(() => {
     // Retrieve user data from sessionStorage
     const userDataString = sessionStorage.getItem('userData');
@@ -13,7 +14,8 @@ const Nav = ({ Toggle }) => {
       setUserData(userDataObject);
     }
   }, []); // This effect runs only once, similar to componentDidMount()
-
+  const username = userData ? userData.username : null;
+   
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-transparent">
             <i className="navbar-brand bi bi-justify-left fs-4" onClick={Toggle}></i>
@@ -25,7 +27,7 @@ const Nav = ({ Toggle }) => {
                 <ul className="navbar-nav  mt-2 mt-lg-0">
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Admin
+                            {username}
                         </a>
                        <div className="dropdown-menu" aria-labelledby="dropdownId">
                            <li><a className="dropdown-item" href="">Profile</a></li> 

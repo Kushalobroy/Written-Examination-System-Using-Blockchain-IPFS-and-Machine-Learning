@@ -61,7 +61,6 @@ function App() {
           <Route path='/' element={<Home/>} />
           <Route path='/Facerecognization' element={<Facerecognization/>}/>
           {/* Admin routes */}
-          {isAdmin && <Route path='/jsadmin' element={<Ahome />} />}
           {isAdmin && <Route path='/Admin' element={<Ahome />} />}
           {isAdmin && <Route path='/AEvaluator' element={<AEvaluator/>} />}
           {isAdmin && <Route path='/Astudent' element={<Astudent/>}/>}

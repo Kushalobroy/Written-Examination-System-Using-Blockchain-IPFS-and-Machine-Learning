@@ -5,11 +5,15 @@ import 'bootstrap/js/dist/dropdown'
 import '../sidebar.css'
 
 function Sidebar() {
+  const userData = JSON.parse(sessionStorage.getItem('userData'));
+ 
+  const username = userData ? userData.username : null;
+  console.log(username);
   return (
     <div className='bg-white sidebar p-2'>
        <div className='m-2'>
             <i className='bi bi-person-circle me-3 fs-4'></i>
-            <span className='brand-name fs-4'>Student</span>
+            <span className='brand-name fs-4'>{username}</span>
        </div>
        <hr className='text-dark'/>
        <div className='list-group list-group-flush'>

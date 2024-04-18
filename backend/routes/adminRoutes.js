@@ -26,7 +26,7 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage, fileFilter });
 
-
+router.get('/home', adminController.home);
 router.get('/', adminController.getAllAdmins);
 router.post('/create', upload.single('photo'), adminController.createAdmin);
 router.post('/addStudent', upload.single('photo'), adminController.createStudent);
