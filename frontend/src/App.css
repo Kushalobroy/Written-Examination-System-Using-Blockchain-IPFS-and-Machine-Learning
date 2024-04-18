@@ -178,6 +178,15 @@ body {
   z-index: 1000; /* Ensure the webcam feed appears above other content */
 }
 
+/* Timer Css */
+
+.timer{
+  position: fixed;
+  top: 100px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+  width: 120px;
+  color: red;
+}
 /* Loader.css - Loader Styles */
 .loader-container {
   position: fixed;

@@ -103,7 +103,7 @@ const Timer = () => {
 
   return (
     <div className="timer">
-      <span>Remaining Time: {formatTime(time)}</span>
+      <span className='fs-6 fw-bold'>{formatTime(time)}</span>
     </div>
   );
 };

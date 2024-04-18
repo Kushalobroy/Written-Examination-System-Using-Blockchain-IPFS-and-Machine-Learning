@@ -159,7 +159,7 @@ app.post('/api/login', async (req, res) => {
     const student = await Student.findOne({ username });
     if (student && await bcrypt.compare(password, student.password)) {
       req.session.user = { id: student._id, role: 'student' };
-      return res.json({ id: student._id, role: 'student',username: student.name });
+      return res.json({ id: student._id, role: 'student',name: student.name, username:student.username, course:student.course,semester:student.semester,branch:student.branch  });
     }
 
     res.status(401).json({ error: 'Invalid credentials' });
