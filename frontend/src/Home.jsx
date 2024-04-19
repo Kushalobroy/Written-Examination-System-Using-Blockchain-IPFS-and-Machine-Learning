@@ -21,14 +21,15 @@ function Home() {
             if (response.ok) {
                 const data = await response.json();
                 toast.success('Login Successful');
-                sessionStorage.setItem('userData', JSON.stringify(data)); 
-                if (data.role === 'student') {
-                    window.location.href = '/Student?id=' + data.id;
-                } else if (data.role === 'admin') {
-                    window.location.href = '/Admin?id=' + data.id;
-                } else if (data.role === 'evaluator') {
-                    window.location.href = '/Evaluator?id=' + data.id;
-                }
+                window.location.href = '/Facerecognization?id=' + data.id;
+                // sessionStorage.setItem('userData', JSON.stringify(data)); 
+                // if (data.role === 'student') {
+                //     window.location.href = '/Student?id=' + data.id;
+                // } else if (data.role === 'admin') {
+                //     window.location.href = '/Admin?id=' + data.id;
+                // } else if (data.role === 'evaluator') {
+                //     window.location.href = '/Evaluator?id=' + data.id;
+                // }
             } else if (response.status === 401) {
                 toast.error('Invalid credentials');
             } else {
