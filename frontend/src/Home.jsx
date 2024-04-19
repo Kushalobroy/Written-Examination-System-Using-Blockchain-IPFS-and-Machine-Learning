@@ -21,8 +21,9 @@ function Home() {
             if (response.ok) {
                 const data = await response.json();
                 toast.success('Login Successful');
+                sessionStorage.setItem('userData', JSON.stringify(data)); 
                 window.location.href = '/Facerecognization?id=' + data.id;
-                // sessionStorage.setItem('userData', JSON.stringify(data)); 
+                
                 // if (data.role === 'student') {
                 //     window.location.href = '/Student?id=' + data.id;
                 // } else if (data.role === 'admin') {

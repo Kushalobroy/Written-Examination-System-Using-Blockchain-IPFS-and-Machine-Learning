@@ -30,23 +30,26 @@ def extract_face_embeddings(image):
     
     return face_tensor
 
-# Define endpoint for face recognition
+# Define endpoint for face recognitionp
 @app.route('/recognize-face', methods=['POST'])
-def recognize_face(image_data1, image_data2):
+def recognize_face():
     try:
-        # Decode image data and convert to OpenCV format
-        image1 = cv2.imdecode(np.frombuffer(image_data1, np.uint8), -1)
-        image2 = cv2.imdecode(np.frombuffer(image_data2, np.uint8), -1)
-
+        # Get data from request
+        data = request.get_json()
+        captured_image = data.get('capturedImage')
+        photo_path = data.get('photoPath')
+        image1 = cv2.imread(captured_image)
+        image2 = cv2.imread(photo_path)
         # Extract embeddings for both images
         embeddings1 = extract_face_embeddings(image1)
         embeddings2 = extract_face_embeddings(image2)
 
-        # Calculate Euclidean distance between the embeddings
-        euclidean_distance = np.linalg.norm(embeddings1.detach().numpy() - embeddings2.detach().numpy())
+       # Calculate Euclidean distance between the embeddings
+        euclidean_distance = np.linalg.norm(embeddings1 - embeddings2)
 
         # Normalize the distance to a similarity score (values closer to 0 indicate higher similarity)
         similarity_score = 1 / (1 + euclidean_distance)
+
 
         # Define a threshold (you may need to adjust this based on your requirements)
         threshold = 0.9

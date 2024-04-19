@@ -11,8 +11,10 @@ const evaluatorRoutes = require('./routes/evaluatorRoutes');
 const Admin = require('./models/adminModel');
 const Evaluator = require('./models/evaluatorModel');
 const Student = require('./models/studentModel');
-
+const multer = require('multer');
+const path = require('path');
 const adminController = require('./controllers/adminController');
+
 
     // const Web3 = require('web3');
     // const web3 = new Web3('http://127.0.0.1:7545');
@@ -169,6 +171,77 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+// Api for Face Verification
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './uploads/verification'); // Define the upload directory
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
+  },
+});
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === 'image/jpeg' ||
+    file.mimetype === 'image/png' ||
+    file.mimetype === 'image/jpg'
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+const upload = multer({ storage, fileFilter });
+app.post('/api/faceVerification', upload.single('capturedImage'), async (req, res) => {
+    const _id = req.body.id;
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded or file path not available' });
+    }
+  
+  const capturedImage = req.file.path;
+  console.log('Path of the uploaded file:', capturedImage);
+   
+    // Check against Admin collection
+    const admin = await Admin.findOne({ _id });
+    console.log(admin);
+    if (admin) {
+      const photoPath = admin.photo.path;
+      const verificationResponse = await sendToFlaskForVerification(capturedImage, photoPath);
+      console.log(verificationResponse);
+      return res.json({ message:"Verification Successfull", id: admin._id, role: 'admin',username: admin.username });
+    }
+    // Check against Evaluator collection
+    const evaluator = await Evaluator.findOne({ _id });
+    if (evaluator) {
+      const photoPath = evaluator.photo.path;
+      const verificationResponse = await sendToFlaskForVerification(capturedImage, photoPath);
+      console.log(verificationResponse);
+      return res.json({ id: evaluator._id, role: 'evaluator', username: evaluator.username, course:evaluator.course, subject:evaluator.subject });
+    }
+    // Check against Student collection
+    const student = await Student.findOne({ _id });
+    if (student) {
+      const photoPath = student.photo.path;
+      const verificationResponse = await sendToFlaskForVerification(capturedImage, photoPath);
+      console.log(verificationResponse);
+      return res.json({ id: student._id, role: 'student',name: student.name, username:student.username, course:student.course,semester:student.semester,branch:student.branch  });
+    }
+});
+
+async function sendToFlaskForVerification(capturedImage, photoPath) {
+  try {
+      const response = await axios.post('http://127.0.0.1:4000/recognize-face', {
+          capturedImage: capturedImage,
+          photoPath: photoPath
+      });
+
+      return response.data;
+  } catch (error) {
+      console.error('Error:', error);
+      throw new Error('Failed to send data to Flask application');
+  }
+}
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
