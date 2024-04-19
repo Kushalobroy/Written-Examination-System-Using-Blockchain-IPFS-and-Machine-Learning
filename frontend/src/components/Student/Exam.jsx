@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/js/dist/modal";
 import FullScreen from "./FullScreen";
@@ -8,10 +8,14 @@ import { Document, Page } from "@react-pdf/renderer";
 import Ansbook from "./Ansbook";
 import TextEditor from "./TextEditor";
 import LiveProctoring from '../LiveProctoring';
-
+import PageLoader from "../PageLoader";
+import Swal from 'sweetalert2'; 
 
 function Exam() {
+  const userData = JSON.parse(sessionStorage.getItem('userData'));
+  const [loading, setLoading] = useState(false);
   const handleAnsBook = async () => {
+    setLoading(true);
     const element = document.getElementById('content-to-convert');
     const options = {
       margin: 10, // Set margin to 10mm
@@ -37,18 +41,42 @@ function Exam() {
 
     // Parse the response to extract the IPFS hash of the uploaded file
     const ipfsHash = response.data.Hash;
-    console.log(ipfsHash);
-    alert('File uploaded to ipfs successfully');
+  
+    const additionalData = {
+      student_id: userData.username,
+      course: 'B.Tech',
+      subject: 'DSA',
+      branch: 'IT',
+      semester: userData.semester,
+      ipfsHash // Include the IPFS hash
+    };
+
+    // Send additional data to backend for storage
+    await axios.post('http://127.0.0.1:5000/api/student/submitExam', additionalData);
+   // Show SweetAlert for success
+   Swal.fire({
+    icon: 'success',
+    title: 'Exam Submitted Successfully!',
+    showConfirmButton: true,
+  }).then((result) => {
+    // Redirect to student dashboard if user clicks "OK"
+    if (result.isConfirmed) {
+      window.location.href = '/Student';
+    }
+  });
+    setLoading(false);
     } catch (error) {
       alert("Something went wrong");
       console.error('Error uploading PDF:', error);
     }
 
     // Prompt the user to save the PDF locally
-    html2pdf().from(element).save('converted.pdf');
+    // html2pdf().from(element).save('converted.pdf');
   };
   return (
     < >
+     <PageLoader loading={loading} />
+     
       <div className="container mt-5" id="content-to-convert">
         <FullScreen />
         <nav class="navbar fixed-top navbar-light bg-light text-center"></nav>

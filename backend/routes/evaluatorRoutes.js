@@ -3,6 +3,7 @@ const router = express.Router();
 const evaluatorController = require('../controllers/evaluatorController');
 
 router.get('/', evaluatorController.getAllEvaluators);
+router.get('/answerBooks', evaluatorController.ansBooks);
 router.get('/:id', evaluatorController.getEvaluatorById);
 router.post('/', evaluatorController.createEvaluator);
 router.put('/:id', evaluatorController.updateEvaluator);

@@ -7,6 +7,7 @@ function Home({ Toggle }) {
     const [totalStudent, setTotalStudent] = useState([]);
     const [totalEvaluator, setTotalEvaluator] = useState([]);
     const [totalAdmin, setTotalAdmin] = useState([]);
+    const [totalAnsBook, setTotalAnsBook] = useState([]);
     // Add state for other data if needed
   
     useEffect(() => {
@@ -16,10 +17,11 @@ function Home({ Toggle }) {
             if (!response.ok) {
               throw new Error('Failed to fetch data');
             }
-            const { student, admin, evaluator /* Add other data here */ } = await response.json();
+            const { student, admin, evaluator,ansBook /* Add other data here */ } = await response.json();
             setTotalStudent(student);
             setTotalEvaluator(evaluator);
             setTotalAdmin(admin);
+            setTotalAnsBook(ansBook);
             // Set state for other data if needed
           } catch (error) {
             console.error('Error fetching data:', error);
@@ -86,7 +88,7 @@ function Home({ Toggle }) {
                     <div className='col-md-3'>
                         <div className='p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded'>
                             <div>
-                                <h3 className='fs-2'>1000</h3>
+                                <h3 className='fs-2'>{totalAnsBook}</h3>
                                 <p className='fs-5'>Answer Books</p>
                             </div>
                             <i className='bi bi-journals p-3 fs-1'></i>

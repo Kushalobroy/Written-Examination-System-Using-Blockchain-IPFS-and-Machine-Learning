@@ -8,7 +8,7 @@ function sidebar() {
   const userData = JSON.parse(sessionStorage.getItem('userData'));
  
   const username = userData ? userData.username : null;
-  console.log(username);
+ 
   return (
     <div className='bg-white sidebar p-2'>
        <div className='m-2'>

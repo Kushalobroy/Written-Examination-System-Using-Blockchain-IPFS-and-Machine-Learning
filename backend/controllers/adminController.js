@@ -1,6 +1,7 @@
 const Admin = require('../models/adminModel');
 const Evaluator = require('../models/evaluatorModel');
 const Student = require('../models/studentModel');
+const AnsBook = require('../models/ansBookModel');
 const ExamSchedulerContract = require('../build/contracts/ExamScheduler.json');
 const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
@@ -14,7 +15,8 @@ exports.home = async(req, res) => {
     const student = await Student.countDocuments();
     const evaluator = await Evaluator.countDocuments();
     const admin = await Admin.countDocuments();
-    res.json({ student, evaluator, admin });
+    const ansBook = await AnsBook.countDocuments();
+    res.json({ student, evaluator, admin, ansBook });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });

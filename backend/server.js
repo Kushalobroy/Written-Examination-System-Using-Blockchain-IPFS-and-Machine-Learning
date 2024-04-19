@@ -152,7 +152,7 @@ app.post('/api/login', async (req, res) => {
     const evaluator = await Evaluator.findOne({ username });
     if (evaluator && await bcrypt.compare(password, evaluator.password)) {
       req.session.user = { id: evaluator._id, role: 'evaluator' };
-      return res.json({ id: evaluator._id, role: 'evaluator', username: evaluator.username });
+      return res.json({ id: evaluator._id, role: 'evaluator', username: evaluator.username, course:evaluator.course, subject:evaluator.subject });
     }
 
     // Check against Student collection

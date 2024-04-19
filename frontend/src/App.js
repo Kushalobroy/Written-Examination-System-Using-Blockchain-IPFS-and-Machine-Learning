@@ -15,6 +15,7 @@ import Aadd from './components/Admin/Aadd';
 import AaddQuestions from './components/Admin/AaddQuestions';
 
 import Eanswerbook from './components/Evaluator/Eanswerbook';
+import Answerbook from './components/Evaluator/Answerbook';
 import Asetting from './components/Admin/Asetting';
 import NotFound from './components/NotFound';
 import PageLoader from './components/PageLoader';
@@ -76,7 +77,7 @@ function App() {
           {/* Evaluator routes */}
           {isEvaluator && <Route path='/Evaluator' element={<Ehome/>} />}
           {isEvaluator && <Route path='/Eanswerbook' element={<Eanswerbook/>}/>}
-          
+          {isEvaluator && <Route path='/Answerbook' element={<Answerbook/>}/>}
           {/* 404 Not Found route */}
           <Route path='/' element={<Home/>} />
         </Routes>

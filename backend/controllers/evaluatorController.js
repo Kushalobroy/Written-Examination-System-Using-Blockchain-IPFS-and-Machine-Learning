@@ -1,5 +1,5 @@
 const Evaluator = require('../models/evaluatorModel');
-
+const AnswerBook = require('../models/ansBookModel');
 exports.getAllEvaluators = async (req, res) => {
   try {
     const evaluators = await Evaluator.find();
@@ -60,5 +60,16 @@ exports.deleteEvaluator = async (req, res) => {
   } catch (error) {
     console.error('Error deleting evaluator:', error);
     res.status(500).send('Internal Server Error');
+  }
+};
+
+exports.ansBooks = async (req, res) =>{
+  try {
+    answerBooks = await AnswerBook.find();
+    
+    res.json(answerBooks);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 };
