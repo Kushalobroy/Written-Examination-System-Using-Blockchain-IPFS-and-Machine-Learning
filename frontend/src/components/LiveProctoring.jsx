@@ -68,9 +68,9 @@ const LiveProctoring = () => {
       video: true,
     };
 
-  //   const handleMotionDetection = () => {
-  //     const canvas = document.createElement('canvas');
-  //     const ctx = canvas.getContext('2d');
+    const handleMotionDetection = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
 
   //     canvas.width = videoRef.current.videoWidth;
   //     canvas.height = videoRef.current.videoHeight;
@@ -116,12 +116,12 @@ const LiveProctoring = () => {
   //         track.stop();
   //       });
   //     }
-  //   };
-  // }, []);
+    };
+  }, []);
 
-  // const motionDetectionThreshold = 100; // Adjust as needed
-  // const motionDetectionInterval = 800; // Adjust as needed
-  // let previousFrame = null;
+  const motionDetectionThreshold = 100; // Adjust as needed
+  const motionDetectionInterval = 800; // Adjust as needed
+  let previousFrame = null;
 
   return (
     <><ToastContainer position="top-right" autoClose='3000'/>
