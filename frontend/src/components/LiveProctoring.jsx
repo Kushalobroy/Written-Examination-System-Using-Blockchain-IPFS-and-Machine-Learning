@@ -25,6 +25,7 @@ const LiveProctoring = () => {
       };
   }, []);
 
+
   const sendVideoFrame = async () => {
       if (!videoStream) return;
 
@@ -59,13 +60,13 @@ const LiveProctoring = () => {
       // Start sending video frames to the backend
       sendVideoFrame();
   }, []);
-  // const videoRef = useRef(null);
-  // const [motionDetected, setMotionDetected] = useState(false);
+  const videoRef = useRef(null);
+  const [motionDetected, setMotionDetected] = useState(false);
 
-  // useEffect(() => {
-  //   const constraints = {
-  //     video: true,
-  //   };
+  useEffect(() => {
+    const constraints = {
+      video: true,
+    };
 
   //   const handleMotionDetection = () => {
   //     const canvas = document.createElement('canvas');
