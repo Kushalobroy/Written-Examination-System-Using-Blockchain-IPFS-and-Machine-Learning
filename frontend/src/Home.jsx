@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from "./components/Footer";
 function Home() {
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -95,6 +96,7 @@ function Home() {
             <a href="#">Forget password?</a>
         </div>
     </div>
+    <Footer/>
     </>
     );
 }
