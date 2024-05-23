@@ -71,13 +71,21 @@ function Aexam() {
         })
       });
       
-      if (response.data && response.data.success) {
-        console.log('Response:', response);
+      if (response.ok) {
+        const responseData = await response.json();
+        if (responseData.success) {
+            console.log('Exam scheduled successfully!');
+            alert('Exam scheduled successfully!');
+            // Additional handling if needed
+        } else {
+            console.error('Failed to schedule exam:', responseData.error);
+            // Handle failure scenario
+        }
+    } else {
+        console.error('Failed to schedule exam:', response.statusText);
+        // Handle failure scenario
+    }
 
-        alert('Exam scheduled successfully!');
-      } else {
-        alert('Failed to schedule exam. Please try again.');
-      }
     } catch (error) {
       console.error('Error scheduling exam:', error);
       alert('Failed to schedule exam. Please try again.');
@@ -148,14 +156,14 @@ function Aexam() {
                                         <div className="mb-3">
                                             <select name="semester" className="form-control" id=""  value={semester} onChange={(e) => setSemester(e.target.value)}>
                                                 <option value="-1" selected>Semester</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
+                                                <option value="one">1</option>
+                                                <option value="two">2</option>
+                                                <option value="three">3</option>
+                                                <option value="four">4</option>
+                                                <option value="five">5</option>
+                                                <option value="six">6</option>
+                                                <option value="seven">7</option>
+                                                <option value="eight">8</option>
                                             </select>
                                         </div>
                                         </div>

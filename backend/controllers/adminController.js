@@ -2,11 +2,15 @@ const Admin = require('../models/adminModel');
 const Evaluator = require('../models/evaluatorModel');
 const Student = require('../models/studentModel');
 const AnsBook = require('../models/ansBookModel');
-const ExamSchedulerContract = require('../build/contracts/ExamScheduler.json');
+//const ExamSchedulerContract = require('../build/contracts/ExamScheduler.json');
 const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
-const examSchedulerAddress = '0xB298E63442FD5E84dFAaeF83E19e58899fA0Db30';
-const examSchedulerContract = new web3.eth.Contract(ExamSchedulerContract.abi, examSchedulerAddress);
+// const examSchedulerAddress = '0x9A88111d3ebCD2b4Bf472aFfC09DB6B94Cd6f7C7';
+// const examSchedulerContract = new web3.eth.Contract(ExamSchedulerContract.abi, examSchedulerAddress);
+
+const contractABI = require('../build/contracts/ExamScheduler.json').abi; // Path to your contract ABI
+const contractAddress = '0x9A88111d3ebCD2b4Bf472aFfC09DB6B94Cd6f7C7'; // Replace with your deployed contract address
+const examSchedulerContract = new web3.eth.Contract(contractABI, contractAddress);
 
 // Controller function to create a new student
 exports.home = async(req, res) => {
@@ -217,23 +221,44 @@ exports.deleteAdmin = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
+
 exports.examSchedule = async(req,res) =>{
   let { course, branch, subject, date, time, duration, examType, semester } = req.body;
-console.log(req.body);
-date = Math.floor(new Date(date).getTime() / 1000);
+    console.log('Request Body:', req.body);
 
-  try {
-    const accounts = await web3.eth.getAccounts();
-    if (accounts.length < 2) {
-      throw new Error('Insufficient accounts available for transaction');
+    const dateUnixTimestamp = Math.floor(new Date(date).getTime() / 1000);
+    const dateString = dateUnixTimestamp.toString();
+    console.log('Unix Timestamp:', dateUnixTimestamp);
+    console.log('Date String:', dateString);
+
+    try {
+        const accounts = await web3.eth.getAccounts();
+        console.log('Accounts:', accounts);
+
+        // Prepare transaction data
+        const txData = examSchedulerContract.methods.scheduleExam(
+            course,
+            branch,
+            subject,
+            dateString,
+            time,
+            duration,
+            examType,
+            semester
+        ).encodeABI();
+
+        // Send transaction
+        const txReceipt = await web3.eth.sendTransaction({
+            from: accounts[0], // Use the first account for sending the transaction
+            to: contractAddress,
+            data: txData,
+            gas: 2000000 // Adjust gas limit as needed
+        });
+
+        console.log('Transaction receipt:', txReceipt);
+        res.status(200).json({ success: true, transactionHash: txReceipt.transactionHash });
+    } catch (error) {
+        console.error('Error scheduling exam:', error);
+        res.status(500).json({ success: false, error: 'Failed to schedule exam' });
     }
-    const result = await examSchedulerContract.methods
-      .scheduleExam(course, branch, subject, date, time, duration, examType, semester)
-      .send({ from: accounts[0] });
-
-    res.status(200).json({ success: true, transactionHash: result.transactionHash });
-  } catch (error) {
-    console.error('Error scheduling exam:', error);
-    res.status(500).json({ success: false, error: 'Failed to schedule exam' });
-  }
 };

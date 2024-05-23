@@ -4,7 +4,7 @@ const Web3 = require('web3');
       .then(accounts => console.log('Connected to Ethereum node. Accounts:', accounts))
       .catch(error => console.error('Error connecting to Ethereum node:', error));
 
-    const contractData = require('./build/contracts/ExamScheduler.json');
+   const contractData = require('./build/contracts/ExamScheduler.json');
     const contract = new web3.eth.Contract(contractData.abi);
 
     const deployContract = async () => {
@@ -13,8 +13,8 @@ const Web3 = require('web3');
           data: contractData.bytecode,
           arguments: [/* constructor arguments if any */],
         }).send({
-          from: '0xf8dbEAF28439984192F2a7E1B1f854a41C3B56a2',  // Replace with your account address from Ganache
-          gas: '10000000',         // Replace with an appropriate gas limit
+          from: '0x8f7Ea1460225c693a76082044A26B8aA31139d34',  // Replace with your account address from Ganache
+          gas: '6721975',         // Replace with an appropriate gas limit
         });
 
         console.log('Contract deployed at address:', deployedContract.options.address);
@@ -23,8 +23,8 @@ const Web3 = require('web3');
       }
     };
     // Call the async function
-deployContract();
-    const contractAddress = '0xB298E63442FD5E84dFAaeF83E19e58899fA0Db30'; // Replace with your contract address
+//deployContract();
+    const contractAddress = '0x9A88111d3ebCD2b4Bf472aFfC09DB6B94Cd6f7C7'; // Replace with your contract address
     // Create a contract instance
     const myContract = new web3.eth.Contract(contractData.abi, contractAddress);
     
@@ -36,22 +36,25 @@ const examData = {
     course: 'Btech',
   branch: 'IT',
   subject: 'Design Thinking',
-  date: Math.floor(new Date("2024-04-07").getTime() / 1000),
+  date: '2024-05-24',
   time: 58860,
   duration: 3600,
   examType: 'subjective',
   semester: '3'
 };
 
-
-const examDate = new Date(examData.date);
-
+// console.log(examData.date);
+// const examDate = new Date(examData.date);
+const dateUnixTimestamp = Math.floor(new Date(examData.date).getTime() / 1000);
+console.log(dateUnixTimestamp);
+const dateString = dateUnixTimestamp.toString();
+console.log(dateString);
 // Check if the date is valid
-if (!isNaN(examDate.getTime())) {
-    console.log("Date:", examDate.toISOString().split('T')[0]); // Output the formatted date
-} else {
-    console.log("Invalid Date");
-}
+// if (!isNaN(examDate.getTime())) {
+//     console.log("Date:", examDate.toISOString().split('T')[0]); // Output the formatted date
+// } else {
+//     console.log("Invalid Date");
+// }
 async function scheduleExam() {
     try {
         // Get accounts from the node
@@ -62,7 +65,7 @@ async function scheduleExam() {
             examData.course,
             examData.branch,
             examData.subject,
-            examData.date,
+            dateString,
             examData.time,
             examData.duration,
             examData.examType,
@@ -83,7 +86,6 @@ async function scheduleExam() {
         console.error('Error scheduling exam:', error);
     }
 }
-
 // Call the scheduleExam function
 scheduleExam();
 
@@ -95,8 +97,6 @@ const testData = {
     date: examData.date, // Use the same date as examData
     time: examData.time, // Use the same time as examData
 };
-
-
 // Function to check if an exam is scheduled
 async function isExamScheduled() {
     try {
@@ -105,7 +105,7 @@ async function isExamScheduled() {
             testData.course,
             testData.branch,
             testData.semester,
-            testData.date,
+            dateString,
         ).call();
 
         console.log('Is exam scheduled:', isScheduled);
@@ -138,8 +138,7 @@ async function displayAllScheduledExams() {
         console.error("Error fetching exam details:", error);
     }
 }
-
 // Call the function to display all scheduled exams
-displayAllScheduledExams();
+//displayAllScheduledExams();
 
     require('dotenv').config();
