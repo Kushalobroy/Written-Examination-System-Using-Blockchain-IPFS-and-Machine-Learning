@@ -12,8 +12,6 @@ import AEvaluator from "./components/Admin/AEvaluator"
 import Astudent from './components/Admin/Astudent';
 import Aexam from './components/Admin/Aexam';
 import Aadd from './components/Admin/Aadd';
-import AaddQuestions from './components/Admin/AaddQuestions';
-
 import Eanswerbook from './components/Evaluator/Eanswerbook';
 import Answerbook from './components/Evaluator/Answerbook';
 import Asetting from './components/Admin/Asetting';
@@ -67,7 +65,6 @@ function App() {
           {isAdmin && <Route path='/Astudent' element={<Astudent/>}/>}
           {isAdmin && <Route path='/Aexam' element={<Aexam/>}/>}
           {isAdmin && <Route path='/Aadd' element={<Aadd/>}/>}
-          {isAdmin && <Route path='/AaddQuestions' element={<AaddQuestions/>}/>}
           {isAdmin && <Route path='/Asetting' element={<Asetting/>}/>}
           
           {/* Student routes */}

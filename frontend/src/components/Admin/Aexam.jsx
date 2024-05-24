@@ -3,9 +3,12 @@ import '../../App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebar from "./sidebar"
 import Nav from './Nav'
-import { Form, Button, ProgressBar } from 'react-bootstrap';
+import { Form, Button} from 'react-bootstrap';
 import SubjectiveForm from "./SubjectiveForm";
 import ObjectiveForm from "./ObjectiveForm";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Swal from 'sweetalert2';
 function Aexam() {
     const [toggle, setToggle] = useState(true)
     const Toggle = () => {
@@ -38,6 +41,8 @@ function Aexam() {
   const [duration, setDuration] = useState('');
   const [semester, setSemester] = useState('');
   const [loading, setLoading] = useState(false);
+  const [examId, setExamId] = useState(null);
+  const [isScheduled, setIsScheduled] = useState(false);
    const handleDurationChange = (e) => {
     const selectedDuration = parseInt(e.target.value); // Parse the selected value to an integer
     const durationInSeconds = selectedDuration * 3600; // Convert hours to seconds
@@ -74,43 +79,57 @@ function Aexam() {
       if (response.ok) {
         const responseData = await response.json();
         if (responseData.success) {
+          const id = responseData.examId;
+          setExamId(id);
+          toast.success(`Exam scheduled successfully with ID: ${id}`);
             console.log('Exam scheduled successfully!');
-            alert('Exam scheduled successfully!');
             // Additional handling if needed
+            showWarningAlert();
+            setIsScheduled(true);
         } else {
-            console.error('Failed to schedule exam:', responseData.error);
+            toast.error('Failed to schedule exam:', responseData.error);
             // Handle failure scenario
         }
     } else {
-        console.error('Failed to schedule exam:', response.statusText);
+        toast.error('Failed to schedule exam:', response.statusText);
         // Handle failure scenario
     }
 
     } catch (error) {
       console.error('Error scheduling exam:', error);
-      alert('Failed to schedule exam. Please try again.');
+      toast('Failed to schedule exam. Please try again.');
     }
 
     setLoading(false);
   };
+  const showWarningAlert = () => {
+    Swal.fire({
+        title: 'Warning',
+        text: 'Add Questions !.',
+        icon: 'warning',
+        confirmButtonText: 'Ok'
+    });
+};
     return (
         <div className="container-fluid bg-secondary min-vh-100">
+          <ToastContainer position="top-right" autoClose='3000'/>
             <div className="row">
                 {toggle && <div className="col-4 col-md-2  bg-white vh-100 position-fixed">
                     <Sidebar />
                 </div>}
                 {toggle && <div className="col-4 col-md-2"></div>}
+                
                 <div className="col">
+                <Nav Toggle={Toggle} />
+                {!isScheduled ? (
                     <div className="px-3">
-                        <Nav Toggle={Toggle} />
-                        <h4 className="text-center fw-bold text-white">Schedule Exam</h4>
                        
-      <ProgressBar now={(step / 2) * 100} className=""/>
-      
-      {step === 1 && (
+                       
+                        <h4 className="text-center fw-bold text-white">Schedule Exam</h4>
+                        
         <Form onSubmit={handleSchedule} controlId="formStep1">
   
-           <div className="row mt-5">
+                              <div className="row mt-5">
                                         <div className="col-md-6">
                                         <div className="mb-3">
                                          
@@ -208,40 +227,32 @@ function Aexam() {
        
         <button type="submit" className="btn btn-warning"> Schedule</button>
         </Form>
-
-      )}
+{/* 
       
        <Form onSubmit={handleSubmit}>
-      {step === 2 && (
+     
         <Form.Group controlId="formStep2">
           <h5 className="text-white">Add Questions</h5>
           
       {examType === 'subjective' && <SubjectiveForm />}
       {examType === 'objective' && <ObjectiveForm />}
         </Form.Group>
-      )}
+    
       
       <div className="d-flex justify-content-between">
-        {step > 1 && (
-          <Button variant="secondary" onClick={handlePrevious}>
-            Previous
-          </Button>
-        )}
-        {step < 2 ? (
-          <Button variant="primary" onClick={handleNext}>
-            Next
-          </Button>
-        ) : (
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        )}
+      
       </div>
-    </Form>
+    </Form> */}
 
                     </div>
-
+  ) : (
+  
+      examType === 'subjective' ? <SubjectiveForm examId={examId} /> : <ObjectiveForm examId={examId}/>
+   
+   
+)}
                 </div>
+            
             </div>
         </div>
 

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-const ObjectiveForm = () => {
+const ObjectiveForm = ({examId}) => {
   const [questions, setQuestions] = useState([{ question: '', options: ['', '', '', ''], correctAnswer: 0 }]);
 
   const handleQuestionChange = (index, event) => {
@@ -45,10 +45,7 @@ const ObjectiveForm = () => {
           
           <br />
           {question.options.map((option, optionIndex) => (
-            <div key={optionIndex}>
-                
-             
-               
+            <div key={optionIndex}>  
                 <input
                   type="text"
                   value={option}
@@ -56,7 +53,6 @@ const ObjectiveForm = () => {
                   placeholder={`Option ${optionIndex + 1}`}
                   onChange={(event) => handleOptionChange(index, optionIndex, event)}
                 />
-            
             </div>
           ))}
           <label>

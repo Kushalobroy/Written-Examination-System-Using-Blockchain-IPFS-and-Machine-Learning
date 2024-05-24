@@ -2,6 +2,7 @@ const Admin = require('../models/adminModel');
 const Evaluator = require('../models/evaluatorModel');
 const Student = require('../models/studentModel');
 const AnsBook = require('../models/ansBookModel');
+const Exam = require('../models/examModel');
 //const ExamSchedulerContract = require('../build/contracts/ExamScheduler.json');
 const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
@@ -9,7 +10,7 @@ const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
 // const examSchedulerContract = new web3.eth.Contract(ExamSchedulerContract.abi, examSchedulerAddress);
 
 const contractABI = require('../build/contracts/ExamScheduler.json').abi; // Path to your contract ABI
-const contractAddress = '0x9A88111d3ebCD2b4Bf472aFfC09DB6B94Cd6f7C7'; // Replace with your deployed contract address
+const contractAddress = '0x3428e5401B84856dE4C05e79A413b24ddB13D71F'; // Replace with your deployed contract address
 const examSchedulerContract = new web3.eth.Contract(contractABI, contractAddress);
 
 // Controller function to create a new student
@@ -26,8 +27,6 @@ exports.home = async(req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
-
-
 exports.createStudent = async (req, res) => {
   try {
     const {
@@ -122,7 +121,6 @@ exports.createEvaluator = async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
-
 // Function to get the list of evaluators
 exports.getEvaluators = async (req, res) => {
   try {
@@ -143,11 +141,8 @@ exports.getAllAdmins = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
-
-
-
 // Function to create a new admin with photo upload
- exports.createAdmin = async (req, res) => {
+exports.createAdmin = async (req, res) => {
     try {
       const { name, email, contact_no, username, password } = req.body;
   
@@ -176,9 +171,8 @@ exports.getAllAdmins = async (req, res) => {
       console.error('Error creating admin:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
-  };
-
-  exports.getAdminById = async (req, res) => {
+};
+exports.getAdminById = async (req, res) => {
     try {
       const admin = await Admin.findById(req.params.id);
       if (!admin) {
@@ -189,7 +183,7 @@ exports.getAllAdmins = async (req, res) => {
       console.error('Error fetching admin by ID:', error);
       res.status(500).send('Internal Server Error');
     }
-  };
+};
 
 exports.updateAdmin = async (req, res) => {
   try {
@@ -256,9 +250,45 @@ exports.examSchedule = async(req,res) =>{
         });
 
         console.log('Transaction receipt:', txReceipt);
-        res.status(200).json({ success: true, transactionHash: txReceipt.transactionHash });
+        // res.status(200).json({ success: true, transactionHash: txReceipt.transactionHash });
+         // Extract the event from the receipt
+         const events = await examSchedulerContract.getPastEvents('ExamScheduled', {
+          fromBlock: txReceipt.blockNumber,
+          toBlock: txReceipt.blockNumber
+      });
+
+      if (events.length > 0) {
+          const examId = events[0].returnValues.id;
+          console.log(`Exam scheduled successfully with ID: ${examId}`);
+          res.status(200).json({ success: true, examId: examId });
+      } else {
+          console.error('Failed to capture ExamScheduled event.');
+          res.status(500).json({ success: false, error: 'Failed to capture ExamScheduled event' });
+      }
     } catch (error) {
         console.error('Error scheduling exam:', error);
         res.status(500).json({ success: false, error: 'Failed to schedule exam' });
     }
+};
+exports.addQuestions = async(req, res) =>{
+  const { examId, questions } = req.body;
+
+  try {
+    const exam = await Exam.findOne({ examId });
+    if (!exam) {
+      // If the exam doesn't exist, create a new one
+      const newExam = new Exam({ examId, questions });
+      await newExam.save();
+      return res.status(200).json({ success: true });
+    }
+
+    // If the exam exists, update the questions
+    exam.questions = questions;
+    await exam.save();
+
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error('Error saving questions:', error);
+    res.status(500).json({ success: false, error: 'Internal server error' });
+  }
 };
